@@ -1,0 +1,24 @@
+{
+	"screen": {
+		"width": 160,
+		"height": 144,
+		"pixelSize": [4, 4],
+		"fullscreen": false
+	},
+	"spriteSize": [8, 8],
+	"palette": [
+		"#183725",
+		"#416E2B",
+		"#9FBB32",
+		"#CFE581"
+	],
+	"controls": {
+		"up": 87,
+		"down": 83,
+		"left": 65,
+		"right": 68,
+		"start": 13,
+		"A": 75,
+		"B": 76
+	}
+}

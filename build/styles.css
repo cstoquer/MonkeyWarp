@@ -1,0 +1,16 @@
+body {
+	text-align: center;
+	font-family: verdana;
+	background-color: #D5E890;
+}
+
+canvas {
+	position: absolute;
+	transform: translateX(-50%);
+	image-rendering: optimizeSpeed;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: optimize-contrast;
+	image-rendering: pixelated;
+	-ms-interpolation-mode: nearest-neighbor;
+}

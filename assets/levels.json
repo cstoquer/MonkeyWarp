@@ -1,0 +1,46 @@
+[
+
+	{ "intermission": true, "chapter": 1, "title": "THE LOST KID", "music": "adventure" },
+	{ "id": "intro",  "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+	{ "id": "cliff",  "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+	{ "id": "up",     "paper": 0, "parallax": 0.8, "doorType": 2,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 2, "title": "ADVENTURE BEGINS" },
+	{ "id": "plain",  "paper": 2, "parallax": 0.7, "doorType": 1,  "music": "adventure" },
+	{ "id": "long",   "paper": 2, "parallax": 0.7, "doorType": 1,  "music": "adventure" },
+	{ "id": "valley", "paper": 2, "parallax": 0.7, "doorType": 1,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 3, "title": "INTO THE WOODS" },
+	{ "id": "forest", "paper": 1, "parallax": 0.7, "doorType": 1,  "music": "adventure" },
+	{ "id": "wood",   "paper": 1, "parallax": 0.7, "doorType": 1,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 4, "title": "BY THE SEASHORE" },
+	{ "id": "sea1",   "paper": 2, "parallax": 0.6, "doorType": 1,  "music": "adventure" },
+	{ "id": "sea2",   "paper": 2, "parallax": 0.6, "doorType": 1,  "music": "adventure" },
+	{ "id": "sea3",   "paper": 2, "parallax": 0.6, "doorType": 1,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 5, "title": "GOING UNDERGROUND" },
+	{ "id": "cave",   "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+	{ "id": "cave2",  "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+	{ "id": "cave3",  "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 6, "title": "THE OLD CASTLE" },
+	{ "id": "catle0", "paper": 0, "parallax": 0.8, "doorType": 2,  "music": "adventure" },
+	{ "id": "castle", "paper": 0, "parallax": 0.8, "doorType": 2,  "music": "adventure" },
+	{ "id": "catle2", "paper": 0, "parallax": 0.8, "doorType": 2,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 7, "title": "THE CATACOMBS" },
+	{ "id": "temple",  "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+	{ "id": "temple2", "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+	{ "id": "temple3", "paper": 0, "parallax": 0.9, "doorType": 2,  "music": "adventure" },
+
+
+	{ "intermission": true, "chapter": 8, "title": "WAY TO HOME",    "music": null },
+	{ "id": "ending", "paper": 0, "parallax": 0.4, "doorType": 1,    "music": "grillons" }
+]
