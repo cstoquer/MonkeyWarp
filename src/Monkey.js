@@ -140,16 +140,6 @@ Monkey.prototype.aim = function (gamepad) {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Monkey.prototype.action = function (gamepad) {
-	// teleport
-	if (this.banana.flying) return this.teleport(); // TODO allow a number of extra push
-
-	// throw banana
-	this.aiming = false;
-	this.banana.fire(this.dx * THROW_SPEED, this.dy * THROW_SPEED);
-};
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 Monkey.prototype.teleport = function () {
 	if (!this.banana.flying) return;
 	var position = this.banana.getTeleportPosition();
@@ -190,8 +180,14 @@ Monkey.prototype.jump = function () {
 Monkey.prototype._updateControls = function (gamepad) {
 	if (this.isLocked) return;
 
-	// throw
-	if (gamepad.btnr.B) this.action(gamepad);
+	// throw banana
+	if (gamepad.btnr.B && !this.banana.flying) {
+		this.aiming = false;
+		this.banana.fire(this.dx * THROW_SPEED, this.dy * THROW_SPEED);
+	}
+
+	// teleport
+	if (gamepad.btnp.B && this.banana.flying) this.teleport();
 
 	// jump
 	if (gamepad.btnp.A) this.startJump();
