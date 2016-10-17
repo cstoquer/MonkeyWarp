@@ -5874,7 +5874,7 @@ Sound.prototype.stop = function (cb) {
 	return cb && cb(); // TODO: fade-out
 };
 
-},{"./ISound.js":30,"util":68}],33:[function(require,module,exports){
+},{"./ISound.js":30,"util":69}],33:[function(require,module,exports){
 var inherits = require('util').inherits;
 var ISound   = require('./ISound.js');
 
@@ -6268,7 +6268,7 @@ SoundBuffered.prototype.stop = function (cb) {
 };
 
 
-},{"./ISound.js":30,"util":68}],34:[function(require,module,exports){
+},{"./ISound.js":30,"util":69}],34:[function(require,module,exports){
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /** Set of sound played in sequence each times it triggers
  *  used for animation sfx
@@ -6567,7 +6567,7 @@ function showProgress(load, current, count, percent) {
 paper(3).cls().paper(2).pen(2).rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8); // loading bar
 assetLoader.preloadStaticAssets(onAssetsLoaded, showProgress);
 
-},{"../settings.json":36,"../src/main.js":55,"EventEmitter":1,"Map":2,"TINA":23,"Texture":26,"assetLoader":27,"audio-manager":29}],36:[function(require,module,exports){
+},{"../settings.json":36,"../src/main.js":56,"EventEmitter":1,"Map":2,"TINA":23,"Texture":26,"assetLoader":27,"audio-manager":29}],36:[function(require,module,exports){
 module.exports={
 	"screen": {
 		"width": 160,
@@ -6807,7 +6807,7 @@ Banana.prototype._catchBanana = function () {
 	}
 };
 
-},{"./AABBcollision":37,"./level":54,"./view/gameView":60}],39:[function(require,module,exports){
+},{"./AABBcollision":37,"./level":55,"./view/gameView":61}],39:[function(require,module,exports){
 var viewManager = require('./viewManager');
 var gameView    = require('./view/gameView');
 var level       = require('./level');
@@ -7145,7 +7145,7 @@ Monkey.prototype.useInteractive = function () {
 	if (this.onTile.door) gameView.gotoNextLevel();
 };
 
-},{"./AABBcollision":37,"./Banana":38,"./level":54,"./tiles":56,"./view/gameView":60,"./viewManager":57}],40:[function(require,module,exports){
+},{"./AABBcollision":37,"./Banana":38,"./level":55,"./tiles":57,"./view/gameView":61,"./viewManager":58}],40:[function(require,module,exports){
 var gameView = require('./view/gameView');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -7192,7 +7192,7 @@ Particle.prototype.draw = function () {
 	draw(current, this.x, this.y, this.flipH, this.flipV);
 };
 
-},{"./view/gameView":60}],41:[function(require,module,exports){
+},{"./view/gameView":61}],41:[function(require,module,exports){
 var gameController = require('./view/gameView');
 
 
@@ -7237,7 +7237,7 @@ ShortAnimation.prototype.setPosition = function (x, y) {
 	this.y = y;
 	return this;
 };
-},{"./view/gameView":60}],42:[function(require,module,exports){
+},{"./view/gameView":61}],42:[function(require,module,exports){
 var Texture = require('Texture');
 var TILE_WIDTH  = settings.spriteSize[0];
 var TILE_HEIGHT = settings.spriteSize[1];
@@ -7309,6 +7309,17 @@ exports.getFX = [
 ];
 
 },{}],44:[function(require,module,exports){
+// preload SFX sounds
+audioManager.loadSound('jump');
+audioManager.loadSound('teleport');
+audioManager.loadSound('catch');
+audioManager.loadSound('wrong');
+audioManager.loadSound('explosion');
+audioManager.loadSound('fall');
+audioManager.loadSound('hit');
+audioManager.loadSound('item');
+audioManager.loadSound('bounce');
+},{}],45:[function(require,module,exports){
 var gameView       = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7422,7 +7433,7 @@ Worm.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../ShortAnimation":41,"../animations":43,"../level":54,"../view/gameView":60,"./ItemLife":49}],45:[function(require,module,exports){
+},{"../ShortAnimation":41,"../animations":43,"../level":55,"../view/gameView":61,"./ItemLife":50}],46:[function(require,module,exports){
 var ANIM_SPEED = 0.2;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -7449,7 +7460,7 @@ Butterfly.prototype.draw = function () {
 	if (this.frame >= 2) this.frame = 0;
 	sprite(230, this.x, this.y, false, this.frame > 1);
 };
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var level    = require('../level');
 var Particle = require('../Particle');
 
@@ -7532,7 +7543,7 @@ ChainedBall.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../Particle":40,"../level":54}],47:[function(require,module,exports){
+},{"../Particle":40,"../level":55}],48:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7589,7 +7600,7 @@ Item.prototype.collectItem = function (monkey) {
 	vfx.setPosition(this.x - 12, this.y - 12);
 	gameController.addEntity(vfx, false);
 };
-},{"../ShortAnimation":41,"../animations":43,"../view/gameView":60}],48:[function(require,module,exports){
+},{"../ShortAnimation":41,"../animations":43,"../view/gameView":61}],49:[function(require,module,exports){
 var gameView = require('../view/gameView');
 var Item     = require('./Item');
 
@@ -7628,7 +7639,7 @@ ItemKey.prototype.collectItem = function (monkey) {
 	gameView.displayMessage("   YOU FOUND A KEY");
 };
 
-},{"../view/gameView":60,"./Item":47}],49:[function(require,module,exports){
+},{"../view/gameView":61,"./Item":48}],50:[function(require,module,exports){
 var gameView = require('../view/gameView');
 var Item     = require('./Item');
 var level    = require('../level');
@@ -7713,7 +7724,7 @@ ItemLife.prototype.collectItem = function (monkey) {
 	gameView.updateHealthHUD();
 };
 
-},{"../level":54,"../view/gameView":60,"./Item":47}],50:[function(require,module,exports){
+},{"../level":55,"../view/gameView":61,"./Item":48}],51:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var level          = require('../level');
 
@@ -7823,7 +7834,7 @@ Spark.prototype._getNextMove = function () {
 };
 
 
-},{"../level":54,"../view/gameView":60}],51:[function(require,module,exports){
+},{"../level":55,"../view/gameView":61}],52:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7909,7 +7920,7 @@ Worm.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../ShortAnimation":41,"../animations":43,"../level":54,"../view/gameView":60,"./ItemLife":49}],52:[function(require,module,exports){
+},{"../ShortAnimation":41,"../animations":43,"../level":55,"../view/gameView":61,"./ItemLife":50}],53:[function(require,module,exports){
 var level       = require('../level');
 var gameView    = require('../view/gameView');
 var ItemKey     = require('./ItemKey');
@@ -7958,7 +7969,7 @@ exports.createEntityfromMapItem = function (item) {
 	}
 };
 
-},{"../level":54,"../view/gameView":60,"./Bat":44,"./Butterfly":45,"./ChainedBall":46,"./ItemKey":48,"./ItemLife":49,"./Spark":50,"./Worm":51}],53:[function(require,module,exports){
+},{"../level":55,"../view/gameView":61,"./Bat":45,"./Butterfly":46,"./ChainedBall":47,"./ItemKey":49,"./ItemLife":50,"./Spark":51,"./Worm":52}],54:[function(require,module,exports){
 var MAPPING_BUTTONS = [
 	'A', 'B', 'X', 'Y',           // buttons
 	'lb', 'rb', 'lt','rt',        // bumpers and triggers
@@ -8100,7 +8111,7 @@ exports.getGamepad = function () {
 };
 
 
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 var Map      = require('Map');
 var Texture  = require('Texture');
 var tiles    = require('./tiles');
@@ -8206,7 +8217,7 @@ exports.getEntryPoints = function () {
 	return { entry: entries[0], exit: exits[0], needKey: needKey };
 };
 
-},{"./entity/entities":52,"./tiles":56,"Map":2,"Texture":26}],55:[function(require,module,exports){
+},{"./entity/entities":53,"./tiles":57,"Map":2,"Texture":26}],56:[function(require,module,exports){
 var viewManager = require('./viewManager');
 
 viewManager.addView('splash',       require('./view/splashView'));
@@ -8226,13 +8237,14 @@ audioManager.channels.banana.setVolume(0.8);
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 viewManager.open('splash');
-// viewManager.open('game', { levelId: 'cave' });
+
+require('./audioPreloading');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // Update is called once per frame
 exports.update = viewManager.update;
 
-},{"./view/creditView":58,"./view/endingView":59,"./view/gameView":60,"./view/gameoverView":61,"./view/intermissionView":62,"./view/splashView":63,"./view/titleView":64,"./viewManager":57}],56:[function(require,module,exports){
+},{"./audioPreloading":44,"./view/creditView":59,"./view/endingView":60,"./view/gameView":61,"./view/gameoverView":62,"./view/intermissionView":63,"./view/splashView":64,"./view/titleView":65,"./viewManager":58}],57:[function(require,module,exports){
 var EMPTY   = exports.EMPTY   = { isEmpty: true,  isSolid: false, isTopSolid: false, fruitSolid: false, isTeleportable: true,  kill: false, interactive: false };
 var SOLID   = exports.SOLID   = { isEmpty: false, isSolid: true,  isTopSolid: true,  fruitSolid: true,  isTeleportable: false, kill: false, interactive: false };
 var ONE_WAY = exports.ONE_WAY = { isEmpty: false, isSolid: false, isTopSolid: true,  fruitSolid: false, isTeleportable: true,  kill: false, interactive: false };
@@ -8259,7 +8271,7 @@ exports.getTileFromMapItem = function (mapItem) {
 };
 
 
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 var views = {};
 
 exports.view = null;
@@ -8281,7 +8293,7 @@ exports.open = function (id, params) {
 exports.update = function () {
 	exports.view.update();
 };
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8329,7 +8341,7 @@ exports.update = function () {
 	if (gamepads.btnp.start) viewManager.open('title');
 };
 
-},{"../TextBox":42,"../gamepad":53,"../viewManager":57}],59:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":58}],60:[function(require,module,exports){
 var TextBox = require('../TextBox');
 
 var SPEED = 15;
@@ -8399,7 +8411,7 @@ exports.update = function () {
 	}
 };
 
-},{"../TextBox":42}],60:[function(require,module,exports){
+},{"../TextBox":42}],61:[function(require,module,exports){
 var Texture       = require('Texture');
 var viewManager   = require('../viewManager');
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
@@ -8664,7 +8676,7 @@ exports.updateHealthHUD = function () {
 	}
 };
 
-},{"../Monkey":39,"../TextBox":42,"../gamepad":53,"../level":54,"../viewManager":57,"Texture":26}],61:[function(require,module,exports){
+},{"../Monkey":39,"../TextBox":42,"../gamepad":54,"../level":55,"../viewManager":58,"Texture":26}],62:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8709,7 +8721,7 @@ exports.update = function () {
 	}
 };
 
-},{"../TextBox":42,"../gamepad":53,"../viewManager":57,"./gameView":60}],62:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":58,"./gameView":61}],63:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8753,7 +8765,7 @@ exports.update = function () {
 	 || gamepads.btnp.start) viewManager.open('game');
 };
 
-},{"../TextBox":42,"../gamepad":53,"../viewManager":57}],63:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":58}],64:[function(require,module,exports){
 var viewManager = require('../viewManager');
 var LOGO = assets.icon.pixelbox;
 
@@ -8773,7 +8785,7 @@ exports.update = function () {
 	if (y == 64) sfx('logo');
 	draw(LOGO, 32, Math.min(y, 64));
 };
-},{"../viewManager":57}],64:[function(require,module,exports){
+},{"../viewManager":58}],65:[function(require,module,exports){
 var viewManager = require('../viewManager');
 var TextBox     = require('../TextBox');
 var gamepad     = require('../gamepad');
@@ -8898,7 +8910,7 @@ exports.update = function () {
 	// if (option === 1 && getBtn(gamepads, 'right')) { controlChoice++; updateText(); }
 	// if (option === 1 && getBtn(gamepads, 'left') ) { controlChoice--; updateText(); }
 };
-},{"../TextBox":42,"../gamepad":53,"../viewManager":57}],65:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":58}],66:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -8923,7 +8935,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9016,14 +9028,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -9613,4 +9625,4 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":67,"_process":66,"inherits":65}]},{},[35]);
+},{"./support/isBuffer":68,"_process":67,"inherits":66}]},{},[35]);
