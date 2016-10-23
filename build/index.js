@@ -5874,7 +5874,7 @@ Sound.prototype.stop = function (cb) {
 	return cb && cb(); // TODO: fade-out
 };
 
-},{"./ISound.js":30,"util":69}],33:[function(require,module,exports){
+},{"./ISound.js":30,"util":71}],33:[function(require,module,exports){
 var inherits = require('util').inherits;
 var ISound   = require('./ISound.js');
 
@@ -6268,7 +6268,7 @@ SoundBuffered.prototype.stop = function (cb) {
 };
 
 
-},{"./ISound.js":30,"util":69}],34:[function(require,module,exports){
+},{"./ISound.js":30,"util":71}],34:[function(require,module,exports){
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /** Set of sound played in sequence each times it triggers
  *  used for animation sfx
@@ -6340,6 +6340,71 @@ SoundGroup.prototype.verifySounds = function () {
 };
 
 },{}],35:[function(require,module,exports){
+// dom utilities
+
+var DOCUMENT_BODY = document.getElementsByTagName('body')[0];
+
+exports.createDom = function (type, className, parent) {
+	parent = parent || DOCUMENT_BODY;
+	var dom = document.createElement(type);
+	parent.appendChild(dom);
+	if (className) dom.className = className;
+	return dom;
+};
+
+exports.createDiv = function (className, parent) {
+	return exports.createDom('div', className, parent);
+};
+
+exports.removeDom = function (dom, parent) {
+	parent = parent || DOCUMENT_BODY;
+	parent.removeChild(dom);
+};
+
+exports.makeButton = function (dom, onClic) {
+	dom.addEventListener('mousedown', function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		onClic(e, dom);
+	});
+	return dom;
+};
+
+function startDrag(dom, e) {
+	var d = document;
+
+	rect = dom.getBoundingClientRect();
+
+	var startX = e.clientX - rect.left;
+	var startY = e.clientY - rect.top;
+
+	function dragMove(e) {
+		e.preventDefault();
+		dom.style.left = (e.clientX - startX) + 'px';
+		dom.style.top  = (e.clientY - startY) + 'px';
+	}
+
+	function dragEnd(e) {
+		e.preventDefault();
+		d.removeEventListener('mouseup',   dragEnd);
+		d.removeEventListener('mousemove', dragMove);
+	}
+
+	d.addEventListener('mousemove', dragMove, false);
+	d.addEventListener('mouseup',   dragEnd,  false);
+}
+
+exports.makeDragable = function (dom, target) {
+	target = target || dom;
+	dom.addEventListener('mousedown', function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		startDrag(target, e);
+	});
+	return dom;
+};
+
+},{}],36:[function(require,module,exports){
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /**
  * Pixelbox main framework module
@@ -6567,7 +6632,7 @@ function showProgress(load, current, count, percent) {
 paper(3).cls().paper(2).pen(2).rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8); // loading bar
 assetLoader.preloadStaticAssets(onAssetsLoaded, showProgress);
 
-},{"../settings.json":36,"../src/main.js":56,"EventEmitter":1,"Map":2,"TINA":23,"Texture":26,"assetLoader":27,"audio-manager":29}],36:[function(require,module,exports){
+},{"../settings.json":37,"../src/main.js":58,"EventEmitter":1,"Map":2,"TINA":23,"Texture":26,"assetLoader":27,"audio-manager":29}],37:[function(require,module,exports){
 module.exports={
 	"screen": {
 		"width": 160,
@@ -6592,7 +6657,7 @@ module.exports={
 		"B": 76
 	}
 }
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 
 function AABBcollision(a, b) {
 	return a.x < b.x + b.w  
@@ -6603,7 +6668,7 @@ function AABBcollision(a, b) {
 
 module.exports = AABBcollision;
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 var level          = require('./level');
 var gameController = require('./view/gameView');
 var AABB           = require('./AABBcollision');
@@ -6807,7 +6872,7 @@ Banana.prototype._catchBanana = function () {
 	}
 };
 
-},{"./AABBcollision":37,"./level":55,"./view/gameView":61}],39:[function(require,module,exports){
+},{"./AABBcollision":38,"./level":57,"./view/gameView":63}],40:[function(require,module,exports){
 var viewManager = require('./viewManager');
 var gameView    = require('./view/gameView');
 var level       = require('./level');
@@ -7145,7 +7210,7 @@ Monkey.prototype.useInteractive = function () {
 	if (this.onTile.door) gameView.gotoNextLevel();
 };
 
-},{"./AABBcollision":37,"./Banana":38,"./level":55,"./tiles":57,"./view/gameView":61,"./viewManager":58}],40:[function(require,module,exports){
+},{"./AABBcollision":38,"./Banana":39,"./level":57,"./tiles":59,"./view/gameView":63,"./viewManager":60}],41:[function(require,module,exports){
 var gameView = require('./view/gameView');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -7192,7 +7257,7 @@ Particle.prototype.draw = function () {
 	draw(current, this.x, this.y, this.flipH, this.flipV);
 };
 
-},{"./view/gameView":61}],41:[function(require,module,exports){
+},{"./view/gameView":63}],42:[function(require,module,exports){
 var gameController = require('./view/gameView');
 
 
@@ -7237,7 +7302,7 @@ ShortAnimation.prototype.setPosition = function (x, y) {
 	this.y = y;
 	return this;
 };
-},{"./view/gameView":61}],42:[function(require,module,exports){
+},{"./view/gameView":63}],43:[function(require,module,exports){
 var Texture = require('Texture');
 var TILE_WIDTH  = settings.spriteSize[0];
 var TILE_HEIGHT = settings.spriteSize[1];
@@ -7285,7 +7350,7 @@ TextBox.prototype.setColor = function (c) {
 	return this;
 };
 
-},{"Texture":26}],43:[function(require,module,exports){
+},{"Texture":26}],44:[function(require,module,exports){
 exports.explosion = [
 	assets.entity.explosion.frame0,
 	assets.entity.explosion.frame1,
@@ -7308,7 +7373,7 @@ exports.getFX = [
 	assets.entity.getFX.frame6
 ];
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 // preload SFX sounds
 audioManager.loadSound('jump');
 audioManager.loadSound('teleport');
@@ -7319,7 +7384,42 @@ audioManager.loadSound('fall');
 audioManager.loadSound('hit');
 audioManager.loadSound('item');
 audioManager.loadSound('bounce');
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
+var gameView = require('./view/gameView');
+var util = require('domUtils');
+
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function onClic(e, dom) {
+	console.log('open', dom.index)
+	gameView.open({ level: dom.index });
+}
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+var panel   = util.createDiv('panel');
+var openBtn = util.createDiv('button', panel);
+var content = util.createDiv('', panel);
+
+var isDisplayed = false;
+content.style.display = 'none';
+openBtn.innerText = '+';
+
+util.makeButton(openBtn, function () {
+	isDisplayed = !isDisplayed;
+	content.style.display = isDisplayed ? '' : 'none';
+})
+
+var levels = assets.levels;
+for (var i = 0; i < levels.length; i++) {
+	if (levels[i].intermission) continue;
+	var button = util.createDiv('button', content);
+	button.innerText = levels[i].id;
+	button.index = i;
+	util.makeButton(button, onClic);
+}
+
+
+},{"./view/gameView":63,"domUtils":35}],47:[function(require,module,exports){
 var gameView       = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7433,7 +7533,7 @@ Worm.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../ShortAnimation":41,"../animations":43,"../level":55,"../view/gameView":61,"./ItemLife":50}],46:[function(require,module,exports){
+},{"../ShortAnimation":42,"../animations":44,"../level":57,"../view/gameView":63,"./ItemLife":52}],48:[function(require,module,exports){
 var ANIM_SPEED = 0.2;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -7460,7 +7560,7 @@ Butterfly.prototype.draw = function () {
 	if (this.frame >= 2) this.frame = 0;
 	sprite(230, this.x, this.y, false, this.frame > 1);
 };
-},{}],47:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var level    = require('../level');
 var Particle = require('../Particle');
 
@@ -7543,7 +7643,7 @@ ChainedBall.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../Particle":40,"../level":55}],48:[function(require,module,exports){
+},{"../Particle":41,"../level":57}],50:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7600,7 +7700,7 @@ Item.prototype.collectItem = function (monkey) {
 	vfx.setPosition(this.x - 12, this.y - 12);
 	gameController.addEntity(vfx, false);
 };
-},{"../ShortAnimation":41,"../animations":43,"../view/gameView":61}],49:[function(require,module,exports){
+},{"../ShortAnimation":42,"../animations":44,"../view/gameView":63}],51:[function(require,module,exports){
 var gameView = require('../view/gameView');
 var Item     = require('./Item');
 
@@ -7639,7 +7739,7 @@ ItemKey.prototype.collectItem = function (monkey) {
 	gameView.displayMessage("   YOU FOUND A KEY");
 };
 
-},{"../view/gameView":61,"./Item":48}],50:[function(require,module,exports){
+},{"../view/gameView":63,"./Item":50}],52:[function(require,module,exports){
 var gameView = require('../view/gameView');
 var Item     = require('./Item');
 var level    = require('../level');
@@ -7724,7 +7824,7 @@ ItemLife.prototype.collectItem = function (monkey) {
 	gameView.updateHealthHUD();
 };
 
-},{"../level":55,"../view/gameView":61,"./Item":48}],51:[function(require,module,exports){
+},{"../level":57,"../view/gameView":63,"./Item":50}],53:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var level          = require('../level');
 
@@ -7834,7 +7934,7 @@ Spark.prototype._getNextMove = function () {
 };
 
 
-},{"../level":55,"../view/gameView":61}],52:[function(require,module,exports){
+},{"../level":57,"../view/gameView":63}],54:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7920,7 +8020,7 @@ Worm.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../ShortAnimation":41,"../animations":43,"../level":55,"../view/gameView":61,"./ItemLife":50}],53:[function(require,module,exports){
+},{"../ShortAnimation":42,"../animations":44,"../level":57,"../view/gameView":63,"./ItemLife":52}],55:[function(require,module,exports){
 var level       = require('../level');
 var gameView    = require('../view/gameView');
 var ItemKey     = require('./ItemKey');
@@ -7969,7 +8069,7 @@ exports.createEntityfromMapItem = function (item) {
 	}
 };
 
-},{"../level":55,"../view/gameView":61,"./Bat":45,"./Butterfly":46,"./ChainedBall":47,"./ItemKey":49,"./ItemLife":50,"./Spark":51,"./Worm":52}],54:[function(require,module,exports){
+},{"../level":57,"../view/gameView":63,"./Bat":47,"./Butterfly":48,"./ChainedBall":49,"./ItemKey":51,"./ItemLife":52,"./Spark":53,"./Worm":54}],56:[function(require,module,exports){
 var MAPPING_BUTTONS = [
 	'A', 'B', 'X', 'Y',           // buttons
 	'lb', 'rb', 'lt','rt',        // bumpers and triggers
@@ -8111,7 +8211,7 @@ exports.getGamepad = function () {
 };
 
 
-},{}],55:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 var Map      = require('Map');
 var Texture  = require('Texture');
 var tiles    = require('./tiles');
@@ -8217,8 +8317,9 @@ exports.getEntryPoints = function () {
 	return { entry: entries[0], exit: exits[0], needKey: needKey };
 };
 
-},{"./entity/entities":53,"./tiles":57,"Map":2,"Texture":26}],56:[function(require,module,exports){
+},{"./entity/entities":55,"./tiles":59,"Map":2,"Texture":26}],58:[function(require,module,exports){
 var viewManager = require('./viewManager');
+require('./debug');
 
 viewManager.addView('splash',       require('./view/splashView'));
 viewManager.addView('title',        require('./view/titleView'));
@@ -8244,7 +8345,7 @@ require('./audioPreloading');
 // Update is called once per frame
 exports.update = viewManager.update;
 
-},{"./audioPreloading":44,"./view/creditView":59,"./view/endingView":60,"./view/gameView":61,"./view/gameoverView":62,"./view/intermissionView":63,"./view/splashView":64,"./view/titleView":65,"./viewManager":58}],57:[function(require,module,exports){
+},{"./audioPreloading":45,"./debug":46,"./view/creditView":61,"./view/endingView":62,"./view/gameView":63,"./view/gameoverView":64,"./view/intermissionView":65,"./view/splashView":66,"./view/titleView":67,"./viewManager":60}],59:[function(require,module,exports){
 var EMPTY   = exports.EMPTY   = { isEmpty: true,  isSolid: false, isTopSolid: false, fruitSolid: false, isTeleportable: true,  kill: false, interactive: false };
 var SOLID   = exports.SOLID   = { isEmpty: false, isSolid: true,  isTopSolid: true,  fruitSolid: true,  isTeleportable: false, kill: false, interactive: false };
 var ONE_WAY = exports.ONE_WAY = { isEmpty: false, isSolid: false, isTopSolid: true,  fruitSolid: false, isTeleportable: true,  kill: false, interactive: false };
@@ -8271,7 +8372,7 @@ exports.getTileFromMapItem = function (mapItem) {
 };
 
 
-},{}],58:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 var views = {};
 
 exports.view = null;
@@ -8293,7 +8394,7 @@ exports.open = function (id, params) {
 exports.update = function () {
 	exports.view.update();
 };
-},{}],59:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8341,7 +8442,7 @@ exports.update = function () {
 	if (gamepads.btnp.start) viewManager.open('title');
 };
 
-},{"../TextBox":42,"../gamepad":54,"../viewManager":58}],60:[function(require,module,exports){
+},{"../TextBox":43,"../gamepad":56,"../viewManager":60}],62:[function(require,module,exports){
 var TextBox = require('../TextBox');
 
 var SPEED = 15;
@@ -8411,7 +8512,7 @@ exports.update = function () {
 	}
 };
 
-},{"../TextBox":42}],61:[function(require,module,exports){
+},{"../TextBox":43}],63:[function(require,module,exports){
 var Texture       = require('Texture');
 var viewManager   = require('../viewManager');
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
@@ -8553,6 +8654,7 @@ function loadLevel() {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function(params) {
 	params = params || {};
+	if (params.level !== undefined) CURRENT_LEVEL = params.level;
 	loadLevel();
 };
 
@@ -8676,7 +8778,7 @@ exports.updateHealthHUD = function () {
 	}
 };
 
-},{"../Monkey":39,"../TextBox":42,"../gamepad":54,"../level":55,"../viewManager":58,"Texture":26}],62:[function(require,module,exports){
+},{"../Monkey":40,"../TextBox":43,"../gamepad":56,"../level":57,"../viewManager":60,"Texture":26}],64:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8721,7 +8823,7 @@ exports.update = function () {
 	}
 };
 
-},{"../TextBox":42,"../gamepad":54,"../viewManager":58,"./gameView":61}],63:[function(require,module,exports){
+},{"../TextBox":43,"../gamepad":56,"../viewManager":60,"./gameView":63}],65:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8765,7 +8867,7 @@ exports.update = function () {
 	 || gamepads.btnp.start) viewManager.open('game');
 };
 
-},{"../TextBox":42,"../gamepad":54,"../viewManager":58}],64:[function(require,module,exports){
+},{"../TextBox":43,"../gamepad":56,"../viewManager":60}],66:[function(require,module,exports){
 var viewManager = require('../viewManager');
 var LOGO = assets.icon.pixelbox;
 
@@ -8785,7 +8887,7 @@ exports.update = function () {
 	if (y == 64) sfx('logo');
 	draw(LOGO, 32, Math.min(y, 64));
 };
-},{"../viewManager":58}],65:[function(require,module,exports){
+},{"../viewManager":60}],67:[function(require,module,exports){
 var viewManager = require('../viewManager');
 var TextBox     = require('../TextBox');
 var gamepad     = require('../gamepad');
@@ -8910,7 +9012,7 @@ exports.update = function () {
 	// if (option === 1 && getBtn(gamepads, 'right')) { controlChoice++; updateText(); }
 	// if (option === 1 && getBtn(gamepads, 'left') ) { controlChoice--; updateText(); }
 };
-},{"../TextBox":42,"../gamepad":54,"../viewManager":58}],66:[function(require,module,exports){
+},{"../TextBox":43,"../gamepad":56,"../viewManager":60}],68:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -8935,7 +9037,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],67:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9028,14 +9130,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],68:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],69:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -9625,4 +9727,4 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":68,"_process":67,"inherits":66}]},{},[35]);
+},{"./support/isBuffer":70,"_process":69,"inherits":68}]},{},[36]);

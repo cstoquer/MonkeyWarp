@@ -139,6 +139,7 @@ function loadLevel() {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function(params) {
 	params = params || {};
+	if (params.level !== undefined) CURRENT_LEVEL = params.level;
 	loadLevel();
 };
 
