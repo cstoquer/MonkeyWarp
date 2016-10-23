@@ -1,4 +1,5 @@
 var viewManager = require('./viewManager');
+require('./debug');
 
 viewManager.addView('splash',       require('./view/splashView'));
 viewManager.addView('title',        require('./view/titleView'));
