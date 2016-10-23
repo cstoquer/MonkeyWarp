@@ -6340,71 +6340,6 @@ SoundGroup.prototype.verifySounds = function () {
 };
 
 },{}],35:[function(require,module,exports){
-// dom utilities
-
-var DOCUMENT_BODY = document.getElementsByTagName('body')[0];
-
-exports.createDom = function (type, className, parent) {
-	parent = parent || DOCUMENT_BODY;
-	var dom = document.createElement(type);
-	parent.appendChild(dom);
-	if (className) dom.className = className;
-	return dom;
-};
-
-exports.createDiv = function (className, parent) {
-	return exports.createDom('div', className, parent);
-};
-
-exports.removeDom = function (dom, parent) {
-	parent = parent || DOCUMENT_BODY;
-	parent.removeChild(dom);
-};
-
-exports.makeButton = function (dom, onClic) {
-	dom.addEventListener('mousedown', function (e) {
-		e.stopPropagation();
-		e.preventDefault();
-		onClic(e, dom);
-	});
-	return dom;
-};
-
-function startDrag(dom, e) {
-	var d = document;
-
-	rect = dom.getBoundingClientRect();
-
-	var startX = e.clientX - rect.left;
-	var startY = e.clientY - rect.top;
-
-	function dragMove(e) {
-		e.preventDefault();
-		dom.style.left = (e.clientX - startX) + 'px';
-		dom.style.top  = (e.clientY - startY) + 'px';
-	}
-
-	function dragEnd(e) {
-		e.preventDefault();
-		d.removeEventListener('mouseup',   dragEnd);
-		d.removeEventListener('mousemove', dragMove);
-	}
-
-	d.addEventListener('mousemove', dragMove, false);
-	d.addEventListener('mouseup',   dragEnd,  false);
-}
-
-exports.makeDragable = function (dom, target) {
-	target = target || dom;
-	dom.addEventListener('mousedown', function (e) {
-		e.stopPropagation();
-		e.preventDefault();
-		startDrag(target, e);
-	});
-	return dom;
-};
-
-},{}],36:[function(require,module,exports){
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /**
  * Pixelbox main framework module
@@ -6632,7 +6567,7 @@ function showProgress(load, current, count, percent) {
 paper(3).cls().paper(2).pen(2).rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8); // loading bar
 assetLoader.preloadStaticAssets(onAssetsLoaded, showProgress);
 
-},{"../settings.json":37,"../src/main.js":58,"EventEmitter":1,"Map":2,"TINA":23,"Texture":26,"assetLoader":27,"audio-manager":29}],37:[function(require,module,exports){
+},{"../settings.json":36,"../src/main.js":56,"EventEmitter":1,"Map":2,"TINA":23,"Texture":26,"assetLoader":27,"audio-manager":29}],36:[function(require,module,exports){
 module.exports={
 	"screen": {
 		"width": 160,
@@ -6657,7 +6592,7 @@ module.exports={
 		"B": 76
 	}
 }
-},{}],38:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 
 function AABBcollision(a, b) {
 	return a.x < b.x + b.w  
@@ -6668,7 +6603,7 @@ function AABBcollision(a, b) {
 
 module.exports = AABBcollision;
 
-},{}],39:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 var level          = require('./level');
 var gameController = require('./view/gameView');
 var AABB           = require('./AABBcollision');
@@ -6872,13 +6807,14 @@ Banana.prototype._catchBanana = function () {
 	}
 };
 
-},{"./AABBcollision":38,"./level":57,"./view/gameView":63}],40:[function(require,module,exports){
+},{"./AABBcollision":37,"./level":55,"./view/gameView":62}],39:[function(require,module,exports){
 var viewManager = require('./viewManager');
 var gameView    = require('./view/gameView');
 var level       = require('./level');
 var Banana      = require('./Banana');
 var AABB        = require('./AABBcollision');
 var tiles       = require('./tiles');
+var speedrun    = require('./speedrun');
 
 var ASSET = assets.entity.monkey;
 var ARROW = assets.entity.arrow;
@@ -7202,6 +7138,7 @@ Monkey.prototype.death = function () {
 	this.lifePoints = this.maxLife;
 	this.isHit      = true;
 	this.isLocked   = true;
+	speedrun.death();
 	viewManager.open('gameover');
 };
 
@@ -7210,7 +7147,7 @@ Monkey.prototype.useInteractive = function () {
 	if (this.onTile.door) gameView.gotoNextLevel();
 };
 
-},{"./AABBcollision":38,"./Banana":39,"./level":57,"./tiles":59,"./view/gameView":63,"./viewManager":60}],41:[function(require,module,exports){
+},{"./AABBcollision":37,"./Banana":38,"./level":55,"./speedrun":57,"./tiles":58,"./view/gameView":62,"./viewManager":59}],40:[function(require,module,exports){
 var gameView = require('./view/gameView');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -7257,7 +7194,7 @@ Particle.prototype.draw = function () {
 	draw(current, this.x, this.y, this.flipH, this.flipV);
 };
 
-},{"./view/gameView":63}],42:[function(require,module,exports){
+},{"./view/gameView":62}],41:[function(require,module,exports){
 var gameController = require('./view/gameView');
 
 
@@ -7302,7 +7239,7 @@ ShortAnimation.prototype.setPosition = function (x, y) {
 	this.y = y;
 	return this;
 };
-},{"./view/gameView":63}],43:[function(require,module,exports){
+},{"./view/gameView":62}],42:[function(require,module,exports){
 var Texture = require('Texture');
 var TILE_WIDTH  = settings.spriteSize[0];
 var TILE_HEIGHT = settings.spriteSize[1];
@@ -7350,7 +7287,7 @@ TextBox.prototype.setColor = function (c) {
 	return this;
 };
 
-},{"Texture":26}],44:[function(require,module,exports){
+},{"Texture":26}],43:[function(require,module,exports){
 exports.explosion = [
 	assets.entity.explosion.frame0,
 	assets.entity.explosion.frame1,
@@ -7373,7 +7310,7 @@ exports.getFX = [
 	assets.entity.getFX.frame6
 ];
 
-},{}],45:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 // preload SFX sounds
 audioManager.loadSound('jump');
 audioManager.loadSound('teleport');
@@ -7384,42 +7321,7 @@ audioManager.loadSound('fall');
 audioManager.loadSound('hit');
 audioManager.loadSound('item');
 audioManager.loadSound('bounce');
-},{}],46:[function(require,module,exports){
-var gameView = require('./view/gameView');
-var util = require('domUtils');
-
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-function onClic(e, dom) {
-	console.log('open', dom.index)
-	gameView.open({ level: dom.index });
-}
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-var panel   = util.createDiv('panel');
-var openBtn = util.createDiv('button', panel);
-var content = util.createDiv('', panel);
-
-var isDisplayed = false;
-content.style.display = 'none';
-openBtn.innerText = '+';
-
-util.makeButton(openBtn, function () {
-	isDisplayed = !isDisplayed;
-	content.style.display = isDisplayed ? '' : 'none';
-})
-
-var levels = assets.levels;
-for (var i = 0; i < levels.length; i++) {
-	if (levels[i].intermission) continue;
-	var button = util.createDiv('button', content);
-	button.innerText = levels[i].id;
-	button.index = i;
-	util.makeButton(button, onClic);
-}
-
-
-},{"./view/gameView":63,"domUtils":35}],47:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var gameView       = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7533,7 +7435,7 @@ Worm.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../ShortAnimation":42,"../animations":44,"../level":57,"../view/gameView":63,"./ItemLife":52}],48:[function(require,module,exports){
+},{"../ShortAnimation":41,"../animations":43,"../level":55,"../view/gameView":62,"./ItemLife":50}],46:[function(require,module,exports){
 var ANIM_SPEED = 0.2;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -7560,7 +7462,7 @@ Butterfly.prototype.draw = function () {
 	if (this.frame >= 2) this.frame = 0;
 	sprite(230, this.x, this.y, false, this.frame > 1);
 };
-},{}],49:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var level    = require('../level');
 var Particle = require('../Particle');
 
@@ -7643,7 +7545,7 @@ ChainedBall.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../Particle":41,"../level":57}],50:[function(require,module,exports){
+},{"../Particle":40,"../level":55}],48:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -7700,7 +7602,7 @@ Item.prototype.collectItem = function (monkey) {
 	vfx.setPosition(this.x - 12, this.y - 12);
 	gameController.addEntity(vfx, false);
 };
-},{"../ShortAnimation":42,"../animations":44,"../view/gameView":63}],51:[function(require,module,exports){
+},{"../ShortAnimation":41,"../animations":43,"../view/gameView":62}],49:[function(require,module,exports){
 var gameView = require('../view/gameView');
 var Item     = require('./Item');
 
@@ -7739,7 +7641,7 @@ ItemKey.prototype.collectItem = function (monkey) {
 	gameView.displayMessage("   YOU FOUND A KEY");
 };
 
-},{"../view/gameView":63,"./Item":50}],52:[function(require,module,exports){
+},{"../view/gameView":62,"./Item":48}],50:[function(require,module,exports){
 var gameView = require('../view/gameView');
 var Item     = require('./Item');
 var level    = require('../level');
@@ -7824,7 +7726,7 @@ ItemLife.prototype.collectItem = function (monkey) {
 	gameView.updateHealthHUD();
 };
 
-},{"../level":57,"../view/gameView":63,"./Item":50}],53:[function(require,module,exports){
+},{"../level":55,"../view/gameView":62,"./Item":48}],51:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var level          = require('../level');
 
@@ -7934,7 +7836,7 @@ Spark.prototype._getNextMove = function () {
 };
 
 
-},{"../level":57,"../view/gameView":63}],54:[function(require,module,exports){
+},{"../level":55,"../view/gameView":62}],52:[function(require,module,exports){
 var gameController = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
@@ -8020,7 +7922,7 @@ Worm.prototype.collisionMonkey = function (monkey) {
 };
 
 
-},{"../ShortAnimation":42,"../animations":44,"../level":57,"../view/gameView":63,"./ItemLife":52}],55:[function(require,module,exports){
+},{"../ShortAnimation":41,"../animations":43,"../level":55,"../view/gameView":62,"./ItemLife":50}],53:[function(require,module,exports){
 var level       = require('../level');
 var gameView    = require('../view/gameView');
 var ItemKey     = require('./ItemKey');
@@ -8069,7 +7971,7 @@ exports.createEntityfromMapItem = function (item) {
 	}
 };
 
-},{"../level":57,"../view/gameView":63,"./Bat":47,"./Butterfly":48,"./ChainedBall":49,"./ItemKey":51,"./ItemLife":52,"./Spark":53,"./Worm":54}],56:[function(require,module,exports){
+},{"../level":55,"../view/gameView":62,"./Bat":45,"./Butterfly":46,"./ChainedBall":47,"./ItemKey":49,"./ItemLife":50,"./Spark":51,"./Worm":52}],54:[function(require,module,exports){
 var MAPPING_BUTTONS = [
 	'A', 'B', 'X', 'Y',           // buttons
 	'lb', 'rb', 'lt','rt',        // bumpers and triggers
@@ -8211,7 +8113,7 @@ exports.getGamepad = function () {
 };
 
 
-},{}],57:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 var Map      = require('Map');
 var Texture  = require('Texture');
 var tiles    = require('./tiles');
@@ -8317,24 +8219,24 @@ exports.getEntryPoints = function () {
 	return { entry: entries[0], exit: exits[0], needKey: needKey };
 };
 
-},{"./entity/entities":55,"./tiles":59,"Map":2,"Texture":26}],58:[function(require,module,exports){
-var viewManager = require('./viewManager');
-require('./debug');
-
-viewManager.addView('splash',       require('./view/splashView'));
-viewManager.addView('title',        require('./view/titleView'));
-viewManager.addView('game',         require('./view/gameView'));
-viewManager.addView('intermission', require('./view/intermissionView'));
-viewManager.addView('credit',       require('./view/creditView'));
-viewManager.addView('gameover',     require('./view/gameoverView'));
-viewManager.addView('ending',       require('./view/endingView'));
-
+},{"./entity/entities":53,"./tiles":58,"Map":2,"Texture":26}],56:[function(require,module,exports){
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // setting audiomanager
 audioManager.settings.defaultFade = 0.01;
 audioManager.addChannel('banana'); // channel for the flying banana looped sound
-audioManager.channels.sfx.setVolume(0.8);
-audioManager.channels.banana.setVolume(0.8);
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+var viewManager = require('./viewManager');
+// require('./debug');
+
+viewManager.addView('splash',         require('./view/splashView'));
+viewManager.addView('title',          require('./view/titleView'));
+viewManager.addView('game',           require('./view/gameView'));
+viewManager.addView('intermission',   require('./view/intermissionView'));
+viewManager.addView('credit',         require('./view/creditView'));
+viewManager.addView('gameover',       require('./view/gameoverView'));
+viewManager.addView('ending',         require('./view/endingView'));
+viewManager.addView('speedrunResult', require('./view/speedrunResultView'));
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 viewManager.open('splash');
@@ -8345,7 +8247,98 @@ require('./audioPreloading');
 // Update is called once per frame
 exports.update = viewManager.update;
 
-},{"./audioPreloading":45,"./debug":46,"./view/creditView":61,"./view/endingView":62,"./view/gameView":63,"./view/gameoverView":64,"./view/intermissionView":65,"./view/splashView":66,"./view/titleView":67,"./viewManager":60}],59:[function(require,module,exports){
+},{"./audioPreloading":44,"./view/creditView":60,"./view/endingView":61,"./view/gameView":62,"./view/gameoverView":63,"./view/intermissionView":64,"./view/speedrunResultView":65,"./view/splashView":66,"./view/titleView":67,"./viewManager":59}],57:[function(require,module,exports){
+var TextBox = require('./TextBox');
+
+var SECOND = 60; // 60 FPS
+var MINUTE = SECOND * 60;
+var HOUR   = MINUTE * 60;
+
+var LEVELS = assets.levels;
+var TOTAL_LEVEL = { index: -1, level: null, chapter: null };
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function initLevelData() {
+	var chapter = { chapter: 0, title: "" };
+	var stage = 1;
+	for (var i = 0; i < assets.levels.length; i++) {
+		var level = assets.levels[i];
+		if (level.intermission) {
+			chapter = assets.levels[i];
+		} else {
+			level.chapter = chapter;
+			level.stage   = stage++;
+		}
+	}
+}
+
+initLevelData();
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function Speedrun(level) {
+	this.data  = level;
+	this.frame = 0;
+	this.death = 0;
+}
+
+Speedrun.prototype.getTime = function () {
+	var time = this.frame;
+
+	// var hours   = ~~(time / HOUR);   time -= hours   * HOUR;
+	var minutes = ~~(time / MINUTE); time -= minutes * MINUTE;
+	var seconds = ~~(time / SECOND); time -= seconds * SECOND;
+	var milli = ~~(100 * time / SECOND);
+
+	var text = ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2) + '.' + ('0' + milli).slice(-2);
+	return text;
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+var speedruns;
+var total;
+var currentSpeedrun;
+var timeDisplay = new TextBox(8 * 8, 8, assets.font.tetris).setColor(0);
+timeDisplay.paper = 0;
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+module.exports.reset = function () {
+	total = new Speedrun(TOTAL_LEVEL);
+	speedruns = [];
+	for (var i = 0; i < LEVELS.length; i++) {
+		speedruns.push(new Speedrun(LEVELS[i]));
+	}
+	currentSpeedrun = speedruns[0];
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+module.exports.setLevel = function (index) {
+	currentSpeedrun = speedruns[index];
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+module.exports.update = function () {
+	total.frame += 1;
+	currentSpeedrun.frame += 1;
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+module.exports.death = function () {
+	total.death += 1;
+	currentSpeedrun.death += 1;
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+module.exports.draw = function () {
+	timeDisplay.cls();
+	timeDisplay.addText(total.getTime(), 0, 0);
+	draw(timeDisplay.texture, 96, 0);
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+module.exports.getResult = function () {
+	return { levels: speedruns, total: total };
+};
+},{"./TextBox":42}],58:[function(require,module,exports){
 var EMPTY   = exports.EMPTY   = { isEmpty: true,  isSolid: false, isTopSolid: false, fruitSolid: false, isTeleportable: true,  kill: false, interactive: false };
 var SOLID   = exports.SOLID   = { isEmpty: false, isSolid: true,  isTopSolid: true,  fruitSolid: true,  isTeleportable: false, kill: false, interactive: false };
 var ONE_WAY = exports.ONE_WAY = { isEmpty: false, isSolid: false, isTopSolid: true,  fruitSolid: false, isTeleportable: true,  kill: false, interactive: false };
@@ -8372,7 +8365,7 @@ exports.getTileFromMapItem = function (mapItem) {
 };
 
 
-},{}],60:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var views = {};
 
 exports.view = null;
@@ -8394,7 +8387,7 @@ exports.open = function (id, params) {
 exports.update = function () {
 	exports.view.update();
 };
-},{}],61:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8442,8 +8435,9 @@ exports.update = function () {
 	if (gamepads.btnp.start) viewManager.open('title');
 };
 
-},{"../TextBox":43,"../gamepad":56,"../viewManager":60}],62:[function(require,module,exports){
-var TextBox = require('../TextBox');
+},{"../TextBox":42,"../gamepad":54,"../viewManager":59}],61:[function(require,module,exports){
+var TextBox     = require('../TextBox');
+var viewManager = require('../viewManager');
 
 var SPEED = 15;
 
@@ -8452,7 +8446,7 @@ var ILLUSTRATIONS = [
 		{ img: null,                                  duration: 4  },
 		{ img: assets.illustrations.monkeyReunion2,   duration: 1  },
 		{ img: assets.illustrations.monkeyReunion1,   duration: 1  },
-		{ img: assets.illustrations.monkeyReunion0,   duration: 40 },
+		{ img: assets.illustrations.monkeyReunion0,   duration: 30 },
 		{ img: assets.illustrations.monkeyReunion1,   duration: 1  },
 		{ img: assets.illustrations.monkeyReunion2,   duration: 1  },
 		{ img: null,                                  duration: 2  }
@@ -8461,7 +8455,7 @@ var ILLUSTRATIONS = [
 		{ img: null,                                  duration: 4  },
 		{ img: assets.illustrations.monkeyStorytime2, duration: 1  },
 		{ img: assets.illustrations.monkeyStorytime1, duration: 1  },
-		{ img: assets.illustrations.monkeyStorytime0, duration: 40 },
+		{ img: assets.illustrations.monkeyStorytime0, duration: 30 },
 		{ img: assets.illustrations.monkeyStorytime1, duration: 1  },
 		{ img: assets.illustrations.monkeyStorytime2, duration: 1  },
 		{ img: null,                                  duration: 8  },
@@ -8478,10 +8472,12 @@ textbox.addText(" THANKS FOR PLAYING", 0, 16);
 var timer        = 0;
 var illustration = 0;
 var frame        = 0;
+var speedrunEnabled = false;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function (params) {
 	params = params || {};
+	speedrunEnabled = !!params.speedrun;
 	timer = 0;
 	camera(0, 0);
 	paper(0).cls();
@@ -8506,19 +8502,21 @@ exports.update = function () {
 		illustration += 1;
 		if (illustration >= ILLUSTRATIONS.length) {
 			// finish
+			if (speedrunEnabled) return viewManager.open('speedrunResult');
 			draw(textbox.texture, 0, 64);
 			timer = Infinity;
 		}
 	}
 };
 
-},{"../TextBox":43}],63:[function(require,module,exports){
+},{"../TextBox":42,"../viewManager":59}],62:[function(require,module,exports){
 var Texture       = require('Texture');
 var viewManager   = require('../viewManager');
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var Monkey        = require('../Monkey');
 var level         = require('../level');
 var TextBox       = require('../TextBox');
+var speedrun      = require('../speedrun');
 
 
 var SCREEN_W = settings.screen.width;
@@ -8566,6 +8564,9 @@ messageBanner.paper = 3;
 
 var healthHUD = new Texture(160, 8);
 
+var speedrunEnabled = false;
+speedrun.reset();
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function resetCamera() {
 	camShakeX      = 0;
@@ -8603,7 +8604,7 @@ function loadLevel() {
 	// we reach the end
 	if (!levelData) {
 		CURRENT_LEVEL = 0;
-		viewManager.open('ending');
+		viewManager.open('ending', { speedrun: speedrunEnabled });
 		return;
 	}
 
@@ -8623,6 +8624,9 @@ function loadLevel() {
 		viewManager.open('intermission', levelData);
 		return;
 	}
+
+	// speedrun
+	speedrun.setLevel(CURRENT_LEVEL);
 
 	// load level
 	level.load(levelData.id);
@@ -8654,7 +8658,8 @@ function loadLevel() {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function(params) {
 	params = params || {};
-	if (params.level !== undefined) CURRENT_LEVEL = params.level;
+	if (params.speedrun !== undefined) speedrunEnabled = params.speedrun;
+	if (params.level    !== undefined) CURRENT_LEVEL = params.level;
 	loadLevel();
 };
 
@@ -8730,6 +8735,12 @@ exports.update = function () {
 
 	// HUD
 	camera(0, 0);
+
+	if (speedrunEnabled) {
+		speedrun.update();
+		speedrun.draw();
+	}
+
 	if (isDisplayingMessage) {
 		draw(messageBanner.texture, 0, 136);
 		if (--displayMessageCounter <= 0) isDisplayingMessage = false;
@@ -8778,7 +8789,7 @@ exports.updateHealthHUD = function () {
 	}
 };
 
-},{"../Monkey":40,"../TextBox":43,"../gamepad":56,"../level":57,"../viewManager":60,"Texture":26}],64:[function(require,module,exports){
+},{"../Monkey":39,"../TextBox":42,"../gamepad":54,"../level":55,"../speedrun":57,"../viewManager":59,"Texture":26}],63:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8823,7 +8834,7 @@ exports.update = function () {
 	}
 };
 
-},{"../TextBox":43,"../gamepad":56,"../viewManager":60,"./gameView":63}],65:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":59,"./gameView":62}],64:[function(require,module,exports){
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
@@ -8867,7 +8878,74 @@ exports.update = function () {
 	 || gamepads.btnp.start) viewManager.open('game');
 };
 
-},{"../TextBox":43,"../gamepad":56,"../viewManager":60}],66:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":59}],65:[function(require,module,exports){
+var TextBox  = require('../TextBox');
+var speedrun = require('../speedrun');
+var gamepad  = require('../gamepad');
+
+var DEATH = chr$(64);
+var MAX_LINE = 11;
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+var textbox = new TextBox(160, 144, assets.font.tetris).setColor(3);
+textbox.paper = 3;
+
+var result;
+var resultOffset = 0;
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function displayResult(offset) {
+	textbox.cls();
+	textbox.addText('RESULT', 56, 0);
+
+	textbox.addText('STAGE   TIME    TRY', 0, 16);
+
+	var i = offset;
+	var line = 0;
+	var levels = result.levels;
+
+	while (line < MAX_LINE && i < levels.length) {
+		var level = levels[i];
+		i += 1;
+		line += 1;
+
+		if (level.data.intermission) {
+			textbox.addText(level.data.title, 0, 8 * line + 24);
+			continue;
+		}
+		textbox.addText((' ' + level.data.stage).slice(-2) + '   ' + level.getTime() + '  ' + DEATH + '*' + level.death, 8, 8 * line + 24);
+	}
+
+	var total = result.total;
+	textbox.addText('TOTAL ' + total.getTime() + '  ' + DEATH + '*' + total.death, 0, 136);
+
+	draw(textbox.texture, 0, 0);
+}
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+exports.open = function (params) {
+	camera(0, 0);
+	result = speedrun.getResult();
+	displayResult(resultOffset);
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function scrollResult() {
+	resultOffset += MAX_LINE;
+	if (resultOffset >= result.levels.length) resultOffset = 0;
+	displayResult(resultOffset);
+}
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+exports.update = function () {
+	var gamepads = gamepad.getAnyGamepad();
+	// action
+	if (gamepads.btnp.A    ) scrollResult();
+	if (gamepads.btnp.B    ) scrollResult();
+	if (gamepads.btnp.start) scrollResult();
+};
+
+},{"../TextBox":42,"../gamepad":54,"../speedrun":57}],66:[function(require,module,exports){
 var viewManager = require('../viewManager');
 var LOGO = assets.icon.pixelbox;
 
@@ -8887,13 +8965,13 @@ exports.update = function () {
 	if (y == 64) sfx('logo');
 	draw(LOGO, 32, Math.min(y, 64));
 };
-},{"../viewManager":60}],67:[function(require,module,exports){
+},{"../viewManager":59}],67:[function(require,module,exports){
 var viewManager = require('../viewManager');
 var TextBox     = require('../TextBox');
 var gamepad     = require('../gamepad');
 
 var SCREEN_HEIGHT = settings.screen.height;
-var OPTIONS_COUNT = 2;
+var OPTIONS_COUNT = 3;
 // var CONTROLS = ['KEYB', 'JOY1', 'JOY2', 'JOY3', 'JOY4'];
 
 // assets
@@ -8906,6 +8984,7 @@ var CURSOR     = assets.hud.cursor;
 var backY  = 0;
 var option = 0;
 // var controlChoice = 1;
+var speedrunEnabled = false;
 
 // text boxes
 var textbox = new TextBox(128, 32, assets.font.tetris).setColor(3);
@@ -8918,9 +8997,9 @@ function updateText() {
 	// gamepad.setInpuMode(controlChoice - 1);
 	var y = 0;
 	textbox.clear();
-	textbox.addText('START GAME',                         0, 8 * y++);
-	// textbox.addText('CONTROL:' + CONTROLS[controlChoice], 0, 8 * y++);
-	textbox.addText('CREDITS',                            0, 8 * y++);
+	textbox.addText('START GAME',                                    0, 8 * y++);
+	textbox.addText('SPEEDRUN:' + (speedrunEnabled ? 'ON' : 'OFF'), 0, 8 * y++);
+	textbox.addText('CREDITS',                                       0, 8 * y++);
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -8970,9 +9049,11 @@ exports.open = function () {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function action() {
 	switch (option) {
-		case 0: viewManager.open('game', { levelId: 0 }); break;
+		case 0: viewManager.open('game', { levelId: 0, speedrun: speedrunEnabled }); break;
+		// case 1: viewManager.open('game', { levelId: 0, speedrun: true  }); break;
 		// case 1: controlChoice++; updateText(); break;
-		case 1: viewManager.open('credit'); break;
+		case 1: speedrunEnabled = !speedrunEnabled; updateText(); break;
+		case 2: viewManager.open('credit'); break;
 	}
 }
 
@@ -8993,8 +9074,8 @@ exports.update = function () {
 	draw(WARP,   warpAnchor.x,   warpAnchor.y);
 
 	// menu
-	draw(textbox.texture, 48, 96);
-	draw(CURSOR, 40, option * 8 + 96);
+	draw(textbox.texture, 40, 96);
+	draw(CURSOR, 32, option * 8 + 96);
 
 	// footer
 	draw(footer.texture, 16, 136);
@@ -9009,10 +9090,10 @@ exports.update = function () {
 	if (gamepads.btnp.B    ) action();
 	if (gamepads.btnp.start) action();
 
-	// if (option === 1 && getBtn(gamepads, 'right')) { controlChoice++; updateText(); }
-	// if (option === 1 && getBtn(gamepads, 'left') ) { controlChoice--; updateText(); }
+	if (option === 1 && gamepads.btnp.right) { speedrunEnabled = !speedrunEnabled; updateText(); }
+	if (option === 1 && gamepads.btnp.left ) { speedrunEnabled = !speedrunEnabled; updateText(); }
 };
-},{"../TextBox":43,"../gamepad":56,"../viewManager":60}],68:[function(require,module,exports){
+},{"../TextBox":42,"../gamepad":54,"../viewManager":59}],68:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -9727,4 +9808,4 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":70,"_process":69,"inherits":68}]},{},[36]);
+},{"./support/isBuffer":70,"_process":69,"inherits":68}]},{},[35]);

@@ -3,7 +3,7 @@ var TextBox     = require('../TextBox');
 var gamepad     = require('../gamepad');
 
 var SCREEN_HEIGHT = settings.screen.height;
-var OPTIONS_COUNT = 2;
+var OPTIONS_COUNT = 3;
 // var CONTROLS = ['KEYB', 'JOY1', 'JOY2', 'JOY3', 'JOY4'];
 
 // assets
@@ -16,6 +16,7 @@ var CURSOR     = assets.hud.cursor;
 var backY  = 0;
 var option = 0;
 // var controlChoice = 1;
+var speedrunEnabled = false;
 
 // text boxes
 var textbox = new TextBox(128, 32, assets.font.tetris).setColor(3);
@@ -28,9 +29,9 @@ function updateText() {
 	// gamepad.setInpuMode(controlChoice - 1);
 	var y = 0;
 	textbox.clear();
-	textbox.addText('START GAME',                         0, 8 * y++);
-	// textbox.addText('CONTROL:' + CONTROLS[controlChoice], 0, 8 * y++);
-	textbox.addText('CREDITS',                            0, 8 * y++);
+	textbox.addText('START GAME',                                    0, 8 * y++);
+	textbox.addText('SPEEDRUN:' + (speedrunEnabled ? 'ON' : 'OFF'), 0, 8 * y++);
+	textbox.addText('CREDITS',                                       0, 8 * y++);
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -80,9 +81,11 @@ exports.open = function () {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function action() {
 	switch (option) {
-		case 0: viewManager.open('game', { levelId: 0 }); break;
+		case 0: viewManager.open('game', { levelId: 0, speedrun: speedrunEnabled }); break;
+		// case 1: viewManager.open('game', { levelId: 0, speedrun: true  }); break;
 		// case 1: controlChoice++; updateText(); break;
-		case 1: viewManager.open('credit'); break;
+		case 1: speedrunEnabled = !speedrunEnabled; updateText(); break;
+		case 2: viewManager.open('credit'); break;
 	}
 }
 
@@ -103,8 +106,8 @@ exports.update = function () {
 	draw(WARP,   warpAnchor.x,   warpAnchor.y);
 
 	// menu
-	draw(textbox.texture, 48, 96);
-	draw(CURSOR, 40, option * 8 + 96);
+	draw(textbox.texture, 40, 96);
+	draw(CURSOR, 32, option * 8 + 96);
 
 	// footer
 	draw(footer.texture, 16, 136);
@@ -119,6 +122,6 @@ exports.update = function () {
 	if (gamepads.btnp.B    ) action();
 	if (gamepads.btnp.start) action();
 
-	// if (option === 1 && getBtn(gamepads, 'right')) { controlChoice++; updateText(); }
-	// if (option === 1 && getBtn(gamepads, 'left') ) { controlChoice--; updateText(); }
+	if (option === 1 && gamepads.btnp.right) { speedrunEnabled = !speedrunEnabled; updateText(); }
+	if (option === 1 && gamepads.btnp.left ) { speedrunEnabled = !speedrunEnabled; updateText(); }
 };

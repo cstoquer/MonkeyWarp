@@ -1,4 +1,5 @@
-var TextBox = require('../TextBox');
+var TextBox     = require('../TextBox');
+var viewManager = require('../viewManager');
 
 var SPEED = 15;
 
@@ -7,7 +8,7 @@ var ILLUSTRATIONS = [
 		{ img: null,                                  duration: 4  },
 		{ img: assets.illustrations.monkeyReunion2,   duration: 1  },
 		{ img: assets.illustrations.monkeyReunion1,   duration: 1  },
-		{ img: assets.illustrations.monkeyReunion0,   duration: 40 },
+		{ img: assets.illustrations.monkeyReunion0,   duration: 30 },
 		{ img: assets.illustrations.monkeyReunion1,   duration: 1  },
 		{ img: assets.illustrations.monkeyReunion2,   duration: 1  },
 		{ img: null,                                  duration: 2  }
@@ -16,7 +17,7 @@ var ILLUSTRATIONS = [
 		{ img: null,                                  duration: 4  },
 		{ img: assets.illustrations.monkeyStorytime2, duration: 1  },
 		{ img: assets.illustrations.monkeyStorytime1, duration: 1  },
-		{ img: assets.illustrations.monkeyStorytime0, duration: 40 },
+		{ img: assets.illustrations.monkeyStorytime0, duration: 30 },
 		{ img: assets.illustrations.monkeyStorytime1, duration: 1  },
 		{ img: assets.illustrations.monkeyStorytime2, duration: 1  },
 		{ img: null,                                  duration: 8  },
@@ -33,10 +34,12 @@ textbox.addText(" THANKS FOR PLAYING", 0, 16);
 var timer        = 0;
 var illustration = 0;
 var frame        = 0;
+var speedrunEnabled = false;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function (params) {
 	params = params || {};
+	speedrunEnabled = !!params.speedrun;
 	timer = 0;
 	camera(0, 0);
 	paper(0).cls();
@@ -61,6 +64,7 @@ exports.update = function () {
 		illustration += 1;
 		if (illustration >= ILLUSTRATIONS.length) {
 			// finish
+			if (speedrunEnabled) return viewManager.open('speedrunResult');
 			draw(textbox.texture, 0, 64);
 			timer = Infinity;
 		}

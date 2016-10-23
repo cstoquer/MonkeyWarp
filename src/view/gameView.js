@@ -4,6 +4,7 @@ var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var Monkey        = require('../Monkey');
 var level         = require('../level');
 var TextBox       = require('../TextBox');
+var speedrun      = require('../speedrun');
 
 
 var SCREEN_W = settings.screen.width;
@@ -51,6 +52,9 @@ messageBanner.paper = 3;
 
 var healthHUD = new Texture(160, 8);
 
+var speedrunEnabled = false;
+speedrun.reset();
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function resetCamera() {
 	camShakeX      = 0;
@@ -88,7 +92,7 @@ function loadLevel() {
 	// we reach the end
 	if (!levelData) {
 		CURRENT_LEVEL = 0;
-		viewManager.open('ending');
+		viewManager.open('ending', { speedrun: speedrunEnabled });
 		return;
 	}
 
@@ -108,6 +112,9 @@ function loadLevel() {
 		viewManager.open('intermission', levelData);
 		return;
 	}
+
+	// speedrun
+	speedrun.setLevel(CURRENT_LEVEL);
 
 	// load level
 	level.load(levelData.id);
@@ -139,7 +146,8 @@ function loadLevel() {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function(params) {
 	params = params || {};
-	if (params.level !== undefined) CURRENT_LEVEL = params.level;
+	if (params.speedrun !== undefined) speedrunEnabled = params.speedrun;
+	if (params.level    !== undefined) CURRENT_LEVEL = params.level;
 	loadLevel();
 };
 
@@ -215,6 +223,12 @@ exports.update = function () {
 
 	// HUD
 	camera(0, 0);
+
+	if (speedrunEnabled) {
+		speedrun.update();
+		speedrun.draw();
+	}
+
 	if (isDisplayingMessage) {
 		draw(messageBanner.texture, 0, 136);
 		if (--displayMessageCounter <= 0) isDisplayingMessage = false;

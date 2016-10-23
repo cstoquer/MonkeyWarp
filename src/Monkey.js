@@ -4,6 +4,7 @@ var level       = require('./level');
 var Banana      = require('./Banana');
 var AABB        = require('./AABBcollision');
 var tiles       = require('./tiles');
+var speedrun    = require('./speedrun');
 
 var ASSET = assets.entity.monkey;
 var ARROW = assets.entity.arrow;
@@ -327,6 +328,7 @@ Monkey.prototype.death = function () {
 	this.lifePoints = this.maxLife;
 	this.isHit      = true;
 	this.isLocked   = true;
+	speedrun.death();
 	viewManager.open('gameover');
 };
 
