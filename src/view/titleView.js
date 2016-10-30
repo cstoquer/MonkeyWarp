@@ -3,7 +3,8 @@ var TextBox     = require('../TextBox');
 var gamepad     = require('../gamepad');
 
 var SCREEN_HEIGHT = settings.screen.height;
-var OPTIONS_COUNT = 3;
+var OPTIONS_COUNT = 4;
+var OPTIONS_Y     = 88;
 // var CONTROLS = ['KEYB', 'JOY1', 'JOY2', 'JOY3', 'JOY4'];
 
 // assets
@@ -30,7 +31,8 @@ function updateText() {
 	var y = 0;
 	textbox.clear();
 	textbox.addText('START GAME',                                    0, 8 * y++);
-	textbox.addText('SPEEDRUN:' + (speedrunEnabled ? 'ON' : 'OFF'), 0, 8 * y++);
+	textbox.addText('SPEEDRUN:' + (speedrunEnabled ? 'ON' : 'OFF'),  0, 8 * y++);
+	textbox.addText('PASSWORD',                                      0, 8 * y++);
 	textbox.addText('CREDITS',                                       0, 8 * y++);
 }
 
@@ -85,7 +87,8 @@ function action() {
 		// case 1: viewManager.open('game', { levelId: 0, speedrun: true  }); break;
 		// case 1: controlChoice++; updateText(); break;
 		case 1: speedrunEnabled = !speedrunEnabled; updateText(); break;
-		case 2: viewManager.open('credit'); break;
+		case 2: viewManager.open('password'); break;
+		case 3: viewManager.open('credit'); break;
 	}
 }
 
@@ -106,8 +109,8 @@ exports.update = function () {
 	draw(WARP,   warpAnchor.x,   warpAnchor.y);
 
 	// menu
-	draw(textbox.texture, 40, 96);
-	draw(CURSOR, 32, option * 8 + 96);
+	draw(textbox.texture, 40, OPTIONS_Y);
+	draw(CURSOR, 32, option * 8 + OPTIONS_Y);
 
 	// footer
 	draw(footer.texture, 16, 136);

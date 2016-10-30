@@ -9,7 +9,9 @@ var viewManager = require('./viewManager');
 
 viewManager.addView('splash',         require('./view/splashView'));
 viewManager.addView('title',          require('./view/titleView'));
+viewManager.addView('password',       require('./view/passwordView'));
 viewManager.addView('game',           require('./view/gameView'));
+viewManager.addView('pause',          require('./view/pauseView'));
 viewManager.addView('intermission',   require('./view/intermissionView'));
 viewManager.addView('credit',         require('./view/creditView'));
 viewManager.addView('gameover',       require('./view/gameoverView'));

@@ -8,7 +8,7 @@ var LEVELS = assets.levels;
 var TOTAL_LEVEL = { index: -1, level: null, chapter: null };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-function initLevelData() {
+(function initLevelData() {
 	var chapter = { chapter: 0, title: "" };
 	var stage = 1;
 	for (var i = 0; i < assets.levels.length; i++) {
@@ -20,9 +20,7 @@ function initLevelData() {
 			level.stage   = stage++;
 		}
 	}
-}
-
-initLevelData();
+})();
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function Speedrun(level) {

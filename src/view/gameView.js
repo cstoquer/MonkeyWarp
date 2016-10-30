@@ -79,6 +79,16 @@ function drawDoor(entryPoint, direction, type) {
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+exports.getLevel = function () {
+	return assets.levels[CURRENT_LEVEL];
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+exports.isSpeedrunEnabled = function () {
+	return speedrunEnabled;
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function loadLevel() {
 	resetCamera();
 
@@ -146,6 +156,7 @@ function loadLevel() {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function(params) {
 	params = params || {};
+	if (params.resume) return;
 	if (params.speedrun !== undefined) speedrunEnabled = params.speedrun;
 	if (params.level    !== undefined) CURRENT_LEVEL = params.level;
 	loadLevel();
@@ -175,10 +186,16 @@ exports.gotoNextLevel = function () {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // Update is called once per frame
 exports.update = function () {
-	paper(backgroundColor).cls();
 
 	// controls
 	var gamepad = getAnyGamepad();
+
+	if (gamepad.btnp.start) {
+		viewManager.open('pause');
+		return;
+	}
+
+	paper(backgroundColor).cls();
 	monkey.update(gamepad);
 
 	// update camera position

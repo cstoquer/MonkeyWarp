@@ -1,7 +1,7 @@
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
+var gameView      = require('./gameView');
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
-var gameView      = require('./gameView');
 
 var TILE_HEIGHT = settings.spriteSize[1];
 var FONDU = getMap('fondu');
@@ -16,7 +16,6 @@ var timer = 0;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.open = function (params) {
-	params = params || {};
 	timer = 0;
 };
 
