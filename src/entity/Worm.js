@@ -4,8 +4,8 @@ var animations     = require('../animations');
 var level          = require('../level');
 var ItemLife       = require('./ItemLife');
 
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 var SPEED = 0.1;
 
 var ANIMATION = [

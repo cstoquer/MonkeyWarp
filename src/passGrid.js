@@ -48,7 +48,7 @@ function getWordFromMatrix(matrix) {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function PassGrid() {
 	this.matrix = new Array(25);
-	this.grid   = new Map(5, 5).setSpritesheet(assets.spritesheet);
+	this.grid   = new Map(5, 5).setTilesheet(assets.tilesheet);
 }
 
 module.exports = PassGrid;

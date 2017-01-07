@@ -1,8 +1,8 @@
 var level    = require('../level');
 var Particle = require('../Particle');
 
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 var TURN_SPEED  = 0.05;
 var FULL_CYCLE  = 2 * Math.PI;
 var CHAIN_LENGTH = 32;

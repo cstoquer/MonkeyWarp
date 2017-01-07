@@ -3,7 +3,7 @@ var gameView      = require('./gameView');
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
 
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_HEIGHT = settings.tileSize[1];
 var FONDU = getMap('fondu');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄

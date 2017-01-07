@@ -4,8 +4,8 @@ var AABB           = require('./AABBcollision');
 
 var ASSET = assets.entity.banana;
 
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 
 var FRICTION         = 0.9;
 var ACCELERATION     = 0.01;

@@ -1,6 +1,6 @@
 var Texture = require('Texture');
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 var CHAR_OFFSET = 32;
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function TextBox(w, h, font, color) {
@@ -10,7 +10,7 @@ function TextBox(w, h, font, color) {
 	this.color = 0;
 
 	this.texture = new Texture(w, h);
-	this.texture.setSpritesheet(font);
+	this.texture.setTilesheet(font);
 }
 
 module.exports = TextBox;

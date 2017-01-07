@@ -3,8 +3,8 @@ var Texture  = require('Texture');
 var tiles    = require('./tiles');
 var entities = require('./entity/entities')
 
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄

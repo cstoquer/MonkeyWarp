@@ -4,8 +4,8 @@ var animations     = require('../animations');
 var level          = require('../level');
 var ItemLife       = require('./ItemLife');
 
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 var ANIMATION_SPEED = 0.2;
 var ANIMATION = [
 	assets.entity.bat.fly0,

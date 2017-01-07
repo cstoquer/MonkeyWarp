@@ -9,8 +9,8 @@ var speedrun    = require('./speedrun');
 var ASSET = assets.entity.monkey;
 var ARROW = assets.entity.arrow;
 
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 
 var GRAVITY     = 0.5;
 var MAX_GRAVITY = 3;

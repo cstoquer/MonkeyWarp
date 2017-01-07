@@ -1,34 +1,43 @@
 {
 	"disposition": {
-		"spritesheet": {
-			"x": 998,
-			"y": 9,
+		"tilesheet": {
+			"x": 888,
+			"y": 15,
 			"viewW": 0,
 			"viewH": 0
 		},
 		"palette": {
-			"x": 21,
-			"y": 640,
+			"x": 12,
+			"y": 645,
 			"viewW": 0,
 			"viewH": 0
 		},
 		"mapEditor": {
-			"x": 239,
-			"y": 9,
-			"viewW": 220,
-			"viewH": 192
+			"x": 205,
+			"y": 10,
+			"viewW": 219,
+			"viewH": 203
 		},
 		"assetList": {
-			"x": 2,
-			"y": 1,
-			"viewW": 225,
-			"viewH": 613
+			"x": 0,
+			"y": 0,
+			"viewW": 185,
+			"viewH": 601,
+			"foldConfig": {
+				"maps": {},
+				"newBank": {
+					"fol": {}
+				}
+			}
 		},
 		"customTools": {
-			"x": 1030,
-			"y": 466,
-			"viewW": 345,
-			"viewH": 265
+			"x": 923,
+			"y": 474,
+			"viewW": 403,
+			"viewH": 313,
+			"foldConfig": {
+				"brush": {}
+			}
 		}
 	}
 }

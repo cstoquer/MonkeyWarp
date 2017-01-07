@@ -9,8 +9,8 @@ var speedrun      = require('../speedrun');
 
 var SCREEN_W = settings.screen.width;
 var SCREEN_H = settings.screen.height;
-var TILE_W   = settings.spriteSize[0];
-var TILE_H   = settings.spriteSize[0];
+var TILE_W   = settings.tileSize[0];
+var TILE_H   = settings.tileSize[0];
 var CENTER_X = ~~(SCREEN_W / 2) - 4;
 var CENTER_Y = ~~(SCREEN_H / 2) - 4;
 

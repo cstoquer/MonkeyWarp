@@ -4,8 +4,8 @@ var PassGrid      = require('../PassGrid');
 var TextBox       = require('../TextBox');
 
 var PASSWORDS   = {};
-var TILE_WIDTH  = settings.spriteSize[0];
-var TILE_HEIGHT = settings.spriteSize[1];
+var TILE_WIDTH  = settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize[1];
 var OFFSET_X    = 52;
 var OFFSET_Y    = 44;
 var BACKGROUND  = getMap('passBG');
