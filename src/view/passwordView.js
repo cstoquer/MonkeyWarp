@@ -1,6 +1,6 @@
 var viewManager   = require('../viewManager');
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
-var PassGrid      = require('../PassGrid');
+var PassGrid      = require('../passGrid');
 var TextBox       = require('../TextBox');
 
 var PASSWORDS   = {};
