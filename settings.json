@@ -12,6 +12,7 @@
 		"#9FBB32",
 		"#CFE581"
 	],
+	"loaderColors": [3, 2],
 	"controls": {
 		"up": 87,
 		"down": 83,
@@ -20,5 +21,14 @@
 		"start": 13,
 		"A": 75,
 		"B": 76
+	},
+	"touchEvent": {
+		"multiTouch": false,
+		"disableContextMenu": false,
+		"hideMousePointer": false
+	},
+	"components": {
+		"TINA": false,
+		"AudioManager": true
 	}
 }

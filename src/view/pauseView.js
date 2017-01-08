@@ -2,7 +2,7 @@ var gameView      = require('./gameView');
 var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
-var PassGrid      = require('../PassGrid');
+var PassGrid      = require('../passGrid');
 
 
 var passGrid = new PassGrid();
