@@ -3,37 +3,8 @@
 		<link rel="stylesheet" type="text/css" href="build/styles.css">
 	</head>
 
-	<body>
+	<body scroll="no">
 
 		<script src="build/index.js" type="text/javascript"></script>
-		<script  type="text/javascript">
-			(function () {
-				var SW = 160;
-				var SH = 144;
-				var PW = 4;
-				var PH = 4;
-
-				var canvas = document.createElement('canvas');
-				document.body.appendChild(canvas);
-
-				canvas.width  = SW * PW;
-				canvas.height = SH * PH;
-				canvas.style.width  = canvas.width  + 'px';
-				canvas.style.height = canvas.height + 'px';
-				canvas.style.zIndex = 9;
-				canvas.style.opacity = 0.12;
-
-				// draw grid
-				var ctx = canvas.getContext('2d');
-				// ctx.fillStyle = '#E4FB95';
-				ctx.fillStyle = '#FFFFFF';
-				for (var x = 0; x < SW; x++) {
-					for (var y = 0; y < SH; y++) {
-						ctx.fillRect(x * PW, 0, 1, SH * PH);
-						ctx.fillRect(0, y * PH, SW * PW, 1);
-					}
-				}
-			})();
-		</script>
 	</body>
 </html>

@@ -2,11 +2,15 @@ body {
 	text-align: center;
 	font-family: verdana;
 	background-color: #D5E890;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
 }
 
 canvas {
 	position: absolute;
-	transform: translateX(-50%);
+	top: 0;
+	left: 0;
 	image-rendering: optimizeSpeed;
 	image-rendering: -moz-crisp-edges;
 	image-rendering: -webkit-optimize-contrast;

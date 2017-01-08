@@ -1,8 +1,8 @@
 {
 	"screen": {
 		"width": 160,
-		"height": 144,
-		"pixelSize": [4, 4],
+		"height": 136,
+		"pixelSize": [3, 2],
 		"fullscreen": false
 	},
 	"tileSize": [8, 8],
@@ -13,12 +13,12 @@
 		"#CFE581"
 	],
 	"controls": {
-		"up": 87,
-		"down": 83,
-		"left": 65,
-		"right": 68,
+		"up": 38,
+		"down": 40,
+		"left": 37,
+		"right": 39,
 		"start": 13,
-		"A": 75,
-		"B": 76
+		"A": 48,
+		"B": 187
 	}
 }

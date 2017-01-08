@@ -247,10 +247,10 @@ exports.update = function () {
 	}
 
 	if (isDisplayingMessage) {
-		draw(messageBanner.texture, 0, 136);
+		draw(messageBanner.texture, 0, 128);
 		if (--displayMessageCounter <= 0) isDisplayingMessage = false;
 	} else {
-		draw(healthHUD, 0, 136);
+		draw(healthHUD, 0, 128);
 	}
 };
 
