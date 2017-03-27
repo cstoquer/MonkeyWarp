@@ -28,7 +28,7 @@ function createEntity(classRef, param, item, collide) {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.createEntityfromMapItem = function (item) {
-	switch (item.tile) {
+	switch (item.sprite) {
 		// items
 		case 32:
 		case 33: return createEntity(ItemKey,     null, item, true);

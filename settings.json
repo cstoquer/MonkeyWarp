@@ -1,4 +1,5 @@
 {
+	"name": "MonkeyWarp",
 	"screen": {
 		"width": 160,
 		"height": 144,
@@ -28,6 +29,8 @@
 		"hideMousePointer": false
 	},
 	"components": {
+		"pixelboxCore": true,
+		"keyboard": true,
 		"TINA": false,
 		"AudioManager": true
 	}

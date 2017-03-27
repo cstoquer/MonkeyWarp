@@ -1,4 +1,4 @@
-var Map = require('Map');
+var TileMap = require('TileMap');
 
 var GRID = getMap('passGrid');
 var BUBBLE = 7;
@@ -48,7 +48,7 @@ function getWordFromMatrix(matrix) {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function PassGrid() {
 	this.matrix = new Array(25);
-	this.grid   = new Map(5, 5).setTilesheet(assets.tilesheet);
+	this.grid   = new TileMap(5, 5).setTilesheet(assets.tilesheet);
 }
 
 module.exports = PassGrid;

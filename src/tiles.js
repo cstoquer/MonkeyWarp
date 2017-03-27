@@ -20,6 +20,6 @@ var tileBySprite = {
 
 exports.getTileFromMapItem = function (mapItem) {
 	if (!mapItem) return EMPTY;
-	return tileBySprite[mapItem.tile] || EMPTY;
+	return tileBySprite[mapItem.sprite] || EMPTY;
 };
 

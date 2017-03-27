@@ -1,4 +1,4 @@
-var Map      = require('Map');
+var TileMap  = require('TileMap');
 var Texture  = require('Texture');
 var tiles    = require('./tiles');
 var entities = require('./entity/entities')
@@ -15,7 +15,7 @@ t.height = 18;
 
 t.background = null;
 t.layer      = new Texture(t.width * TILE_WIDTH, t.height * TILE_HEIGHT);
-t.geometry   = new Map(t.width, t.height);
+t.geometry   = new TileMap(t.width, t.height);
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.load = function (levelId) {

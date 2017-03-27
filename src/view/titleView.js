@@ -22,7 +22,7 @@ var speedrunEnabled = false;
 // text boxes
 var textbox = new TextBox(128, 32, assets.font.tetris).setColor(3);
 var footer  = new TextBox(128, 8,  assets.font.tetris).setColor(3);
-footer.addText('  GBJAM#5 2016', 0, 0);
+footer.addText('  STK & CO 2016', 0, 0);
 
 function updateText() {
 	// if (controlChoice >= CONTROLS.length) controlChoice = 0;
