@@ -1,0 +1,59 @@
+{
+	"name": "MonkeyWarp",
+	"version": "2.0.0",
+	"screen": {
+		"fullscreen": false,
+		"resizable": false,
+		"width": 160,
+		"height": 144,
+		"pixelSize": {
+			"width": 4,
+			"height": 4
+		}
+	},
+	"tileSize": {
+		"width": 8,
+		"height": 8
+	},
+	"palette": [
+		"#183725",
+		"#416E2B",
+		"#9FBB32",
+		"#CFE581"
+	],
+	"controls": {
+		"left": 65,
+		"B": 76,
+		"up": 87,
+		"down": 83,
+		"right": 68,
+		"A": 75,
+		"start": 13
+	},
+	"gamepad": {
+		"analogToDpad": true,
+		"deadZone": 0.5
+	},
+	"touchEvent": {
+		"multiTouch": false,
+		"disableContextMenu": false,
+		"hideMousePointer": false
+	},
+	"components": {
+		"pixelboxCore": true,
+		"keyboard": true,
+		"AudioManager": true,
+		"TINA": false,
+		"gamepad": true
+	},
+	"loader": {
+		"colors": [
+			3,
+			2
+		],
+		"custom": ""
+	},
+	"buildOptions": {
+		"hasAtlas": true
+	}
+}

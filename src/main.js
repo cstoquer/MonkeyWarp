@@ -23,6 +23,10 @@ viewManager.open('splash');
 
 require('./audioPreloading');
 
+if (DEBUG) {
+	window.cheatcode = require('./debug');
+}
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // Update is called once per frame
 exports.update = viewManager.update;

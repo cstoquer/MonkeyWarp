@@ -1,12 +1,11 @@
 
-var map;
 var clipboard;
 var mapInit;
-var spritesheet;
+var tilesheet;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function drawRectangle(map, x0, y0, x1, y1) {
-	// check that rectangle have dimension 
+	// check that rectangle have dimension
 	if (x0 === x1 && y0 === y1) return;
 
 	// set start and end coordinate in correct order
@@ -14,7 +13,7 @@ function drawRectangle(map, x0, y0, x1, y1) {
 	if (y0 > y1) { var y = y0; y0 = y1; y1 = y; }
 
 	// top-left sprite
-	var s = spritesheet.sprite;
+	var s = tilesheet.sprite;
 
 	// special case: if hill width is 1
 	if (x1 === x0) {
@@ -40,21 +39,20 @@ var pw, ph; // previous position
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 module.exports = {
 	name: 'hills',
-	description: 'Draw rectangular hills using 6 + 2 grid.\nSelect the top left corner of the hill pattern in the spritesheet.',
+	description: 'Draw rectangular hills using 6 + 2 grid.\nSelect the top left corner of the hill pattern in the tilesheet.',
 	select: function (toolbox, listItem) {
-		map = toolbox.mapEditor.map;
 		clipboard = toolbox.mapClipboard;
-		spritesheet = toolbox.spritesheet;
+		tilesheet = toolbox.tilesheet;
 	},
 
-	start: function (x, y, toolbox) {
+	start: function (x, y, map, toolbox, e) {
 		mapInit = map.copy();
 		sx = x;
 		sy = y;
 		pw = ph = 0;
 	},
 
-	draw: function (x, y, toolbox, isStart) {
+	draw: function (x, y, map, toolbox, isStart, e) {
 		var h = Math.abs(x - sx);
 		var w = Math.abs(y - sy);
 		if (w < pw || h < ph) map.paste(mapInit);
@@ -66,4 +64,4 @@ module.exports = {
 	end: function (x, y, toolbox) {
 		mapInit = null;
 	}
-}
+};

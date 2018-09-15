@@ -9,8 +9,8 @@ var speedrun    = require('./speedrun');
 var ASSET = assets.entity.monkey;
 var ARROW = assets.entity.arrow;
 
-var TILE_WIDTH  = settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 
 var GRAVITY     = 0.5;
 var MAX_GRAVITY = 3;
@@ -19,20 +19,16 @@ var SPEED_RUN   = 2;
 var THROW_SPEED = 4;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-function Monkey(gamepadIndex) {
+function Monkey() {
 	this.x  = 0;
 	this.y  = 0;
 	this.w  = TILE_WIDTH;
 	this.h  = TILE_HEIGHT;
 
-	this.gamepadIndex = gamepadIndex || 0;
 	this.banana = new Banana(this);
-	
+
 	this.maxLife = 4;
 	this.lifePoints = this.maxLife;
-
-	// rendering
-	this.sprite = gamepadIndex * 16;
 
 	this.reset();
 }
@@ -66,7 +62,7 @@ Monkey.prototype.reset = function () {
 	// rendering
 	this.frame = 0;
 	this.flipH = false;
-	
+
 	this.banana.reset();
 };
 
@@ -95,8 +91,8 @@ Monkey.prototype.draw = function () {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Monkey.prototype.update = function (gamepad) {
-	this._updateControls(gamepad);
+Monkey.prototype.update = function () {
+	this._updateControls();
 
 	// movement, gravity, friction
 	this.sx *= this.isHit ? 0.99 : 0.8;
@@ -123,7 +119,7 @@ Monkey.prototype.update = function (gamepad) {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Monkey.prototype.aim = function (gamepad) {
+Monkey.prototype.aim = function () {
 	if (this.banana.flying) return;
 
 	this.aiming = true;
@@ -178,7 +174,7 @@ Monkey.prototype.jump = function () {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Monkey.prototype._updateControls = function (gamepad) {
+Monkey.prototype._updateControls = function () {
 	if (this.isLocked) return;
 
 	// throw banana

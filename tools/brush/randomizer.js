@@ -4,10 +4,10 @@ module.exports = {
 	name: 'randomizer',
 	description: 'Draw a random tile from the clipboard',
 
-	draw: function (x, y, toolbox, isStart) {
+	draw: function (x, y, map, toolbox, isStart) {
 		//delete
 		if (toolbox.keyboard.shift) {
-			toolbox.mapEditor.map.remove(x, y);
+			map.remove(x, y);
 			return;
 		}
 
@@ -17,6 +17,6 @@ module.exports = {
 			~~(Math.random() * clipboard.width),
 			~~(Math.random() * clipboard.height)
 		);
-		toolbox.mapEditor.map.set(x, y, item.sprite, item.flipH, item.flipV, item.flipR, item.flagA, item.flagB);
+		map.set(x, y, item.sprite, item.flipH, item.flipV, item.flipR, item.flagA, item.flagB);
 	}
 }

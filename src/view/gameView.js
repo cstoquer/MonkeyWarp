@@ -1,6 +1,5 @@
 var Texture       = require('Texture');
 var viewManager   = require('../viewManager');
-var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var Monkey        = require('../Monkey');
 var level         = require('../level');
 var TextBox       = require('../TextBox');
@@ -9,8 +8,8 @@ var speedrun      = require('../speedrun');
 
 var SCREEN_W = settings.screen.width;
 var SCREEN_H = settings.screen.height;
-var TILE_W   = settings.tileSize[0];
-var TILE_H   = settings.tileSize[0];
+var TILE_W   = settings.tileSize.width  || settings.tileSize[0];
+var TILE_H   = settings.tileSize.width  || settings.tileSize[0];
 var CENTER_X = ~~(SCREEN_W / 2) - 4;
 var CENTER_Y = ~~(SCREEN_H / 2) - 4;
 
@@ -182,21 +181,19 @@ exports.gotoNextLevel = function () {
 	CURRENT_LEVEL += 1;
 	loadLevel();
 };
-	
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // Update is called once per frame
 exports.update = function () {
 
 	// controls
-	var gamepad = getAnyGamepad();
-
 	if (gamepad.btnp.start) {
 		viewManager.open('pause');
 		return;
 	}
 
 	paper(backgroundColor).cls();
-	monkey.update(gamepad);
+	monkey.update();
 
 	// update camera position
 	var scrollX = clip(monkey.x - CENTER_X, 0, MAX_LEVEL_W);
@@ -208,7 +205,7 @@ exports.update = function () {
 	camY += (scrollY - camY) * CAMERA_ACCELERATION;
 
 	// camera shaking
-	
+
 	camShakeSpeedX -= camShakeX * CAMERA_SHAKE_ACCELERATION;
 	camShakeSpeedY -= camShakeY * CAMERA_SHAKE_ACCELERATION;
 	camShakeSpeedX *= CAMERA_SHAKE_FRICTION;

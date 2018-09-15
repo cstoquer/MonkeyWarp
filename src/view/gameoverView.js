@@ -1,9 +1,8 @@
-var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var gameView      = require('./gameView');
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
 
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 var FONDU = getMap('fondu');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -33,8 +32,7 @@ exports.update = function () {
 	draw(gameoverText.texture, 0, 56);
 	draw(continueText.texture, 0, 72);
 
-	var gamepads = getAnyGamepad();
-	if (gamepads.btnp.A || gamepads.btnp.B || gamepads.btnp.start) {
+	if (gamepad.btnp.A || gamepad.btnp.B || gamepad.btnp.start) {
 		// continue
 		gameView.respawn();
 		viewManager.open('game');

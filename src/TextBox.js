@@ -1,6 +1,6 @@
 var Texture = require('Texture');
-var TILE_WIDTH  = settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 var CHAR_OFFSET = 32;
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function TextBox(w, h, font, color) {

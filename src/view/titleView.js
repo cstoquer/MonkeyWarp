@@ -1,6 +1,5 @@
 var viewManager = require('../viewManager');
 var TextBox     = require('../TextBox');
-var gamepad     = require('../gamepad');
 
 var SCREEN_HEIGHT = settings.screen.height;
 var OPTIONS_COUNT = 4;
@@ -27,7 +26,6 @@ footer.addText('  GBJAM#5 2016', 0, 0);
 function updateText() {
 	// if (controlChoice >= CONTROLS.length) controlChoice = 0;
 	// if (controlChoice < 0) controlChoice = CONTROLS.length - 1;
-	// gamepad.setInpuMode(controlChoice - 1);
 	var y = 0;
 	textbox.clear();
 	textbox.addText('START GAME',                                    0, 8 * y++);
@@ -71,16 +69,6 @@ exports.open = function () {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-// function getBtn(gamepads, key) {
-// 	if (gamepads[0].btnp[key]
-// 	 || gamepads[1].btnp[key]
-// 	 || gamepads[2].btnp[key]
-// 	 || gamepads[3].btnp[key]
-// 	 || btnp[key]) return true;
-// 	return false;
-// }
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function action() {
 	switch (option) {
 		case 0: viewManager.open('game', { levelId: 0, speedrun: speedrunEnabled }); break;
@@ -116,15 +104,14 @@ exports.update = function () {
 	draw(footer.texture, 16, 136);
 
 	// inputs
-	var gamepads = gamepad.getAnyGamepad();
-	if (gamepads.btnp.down ) { option += 1; if (option >= OPTIONS_COUNT) option = 0; }
-	if (gamepads.btnp.up   ) { option -= 1; if (option < 0) option = OPTIONS_COUNT - 1; }
+	if (gamepad.btnp.down ) { option += 1; if (option >= OPTIONS_COUNT) option = 0; }
+	if (gamepad.btnp.up   ) { option -= 1; if (option < 0) option = OPTIONS_COUNT - 1; }
 
 	// action
-	if (gamepads.btnp.A    ) action();
-	if (gamepads.btnp.B    ) action();
-	if (gamepads.btnp.start) action();
+	if (gamepad.btnp.A    ) action();
+	if (gamepad.btnp.B    ) action();
+	if (gamepad.btnp.start) action();
 
-	if (option === 1 && gamepads.btnp.right) { speedrunEnabled = !speedrunEnabled; updateText(); }
-	if (option === 1 && gamepads.btnp.left ) { speedrunEnabled = !speedrunEnabled; updateText(); }
+	if (option === 1 && gamepad.btnp.right) { speedrunEnabled = !speedrunEnabled; updateText(); }
+	if (option === 1 && gamepad.btnp.left ) { speedrunEnabled = !speedrunEnabled; updateText(); }
 };

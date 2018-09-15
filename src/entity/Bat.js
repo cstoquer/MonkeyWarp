@@ -4,8 +4,8 @@ var animations     = require('../animations');
 var level          = require('../level');
 var ItemLife       = require('./ItemLife');
 
-var TILE_WIDTH  = settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 var ANIMATION_SPEED = 0.2;
 var ANIMATION = [
 	assets.entity.bat.fly0,
@@ -23,7 +23,7 @@ var MAX_SPEED        = 0.5;
 var ANIMATION_LENGTH = ANIMATION.length;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-function Worm(params) {
+function Bat(params) {
 	this.x  = 0;
 	this.y  = 0;
 	this.w  = 8;
@@ -35,10 +35,10 @@ function Worm(params) {
 	this.frame = random(ANIMATION_LENGTH);
 }
 
-module.exports = Worm;
+module.exports = Bat;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Worm.prototype.draw = function () {
+Bat.prototype.draw = function () {
 	var monkey = gameView.monkey;
 
 	if (this.sleeping) {
@@ -86,7 +86,7 @@ Worm.prototype.draw = function () {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Worm.prototype.collisionBanana = function (banana) {
+Bat.prototype.collisionBanana = function (banana) {
 	sfx('explosion');
 
 	gameView.removeEntity(this);
@@ -106,7 +106,7 @@ Worm.prototype.collisionBanana = function (banana) {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Worm.prototype.collisionMonkey = function (monkey) {
+Bat.prototype.collisionMonkey = function (monkey) {
 	monkey.hit(this);
 };
 

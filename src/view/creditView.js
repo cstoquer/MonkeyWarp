@@ -1,8 +1,5 @@
-var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
-
-var SCREEN_HEIGHT = settings.screen.height;
 
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -38,9 +35,8 @@ exports.open = function () {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.update = function () {
-	var gamepads = getAnyGamepad();
 	// action
-	if (gamepads.btnp.A    ) viewManager.open('title');
-	if (gamepads.btnp.B    ) viewManager.open('title');
-	if (gamepads.btnp.start) viewManager.open('title');
+	if (gamepad.btnp.A    ) viewManager.open('title');
+	if (gamepad.btnp.B    ) viewManager.open('title');
+	if (gamepad.btnp.start) viewManager.open('title');
 };

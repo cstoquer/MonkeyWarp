@@ -1,13 +1,6 @@
 var viewManager = require('./viewManager');
 var util        = require('domUtils');
 
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-function onClic(e, dom) {
-	console.log('open', dom.index)
-	viewManager.open('game', { level: dom.index });
-}
-
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 var panel   = util.createDiv('panel');
 var openBtn = util.createDiv('button', panel);
@@ -17,10 +10,21 @@ var isDisplayed = false;
 content.style.display = 'none';
 openBtn.innerText = '+';
 
-util.makeButton(openBtn, function () {
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function toggleDisplay() {
 	isDisplayed = !isDisplayed;
 	content.style.display = isDisplayed ? '' : 'none';
-})
+}
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function onClic(e) {
+	// console.log('open', this.index)
+	viewManager.open('game', { level: this.index });
+	toggleDisplay();
+}
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+util.makeClickable(openBtn, toggleDisplay);
 
 var levels = assets.levels;
 for (var i = 0; i < levels.length; i++) {
@@ -28,6 +32,6 @@ for (var i = 0; i < levels.length; i++) {
 	var button = util.createDiv('button', content);
 	button.innerText = levels[i].id;
 	button.index = i;
-	util.makeButton(button, onClic);
+	util.makeClickable(button, onClic);
 }
 

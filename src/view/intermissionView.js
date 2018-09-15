@@ -1,4 +1,3 @@
-var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
 
@@ -33,10 +32,9 @@ exports.update = function () {
 		return;
 	};
 
-	var gamepads = getAnyGamepad();
 	// action
 	if (timer >= 150
-	 || gamepads.btnp.A
-	 || gamepads.btnp.B
-	 || gamepads.btnp.start) viewManager.open('game');
+	 || gamepad.btnp.A
+	 || gamepad.btnp.B
+	 || gamepad.btnp.start) viewManager.open('game');
 };

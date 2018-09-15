@@ -1,1 +1,0 @@
-require('../pixelbox/index.js');

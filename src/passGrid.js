@@ -1,4 +1,4 @@
-var Map = require('Map');
+var Map = require('TileMap');
 
 var GRID = getMap('passGrid');
 var BUBBLE = 7;

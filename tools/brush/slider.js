@@ -12,8 +12,7 @@ module.exports = {
 	name: 'slider',
 	description: 'Shift the whole map in any of 4 directions.',
 
-	start: function (x, y, toolbox) {
-		var map = toolbox.mapEditor.map;
+	start: function (x, y, map, toolbox) {
 		var w = map.width;
 		var h = map.height;
 

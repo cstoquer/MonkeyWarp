@@ -2,8 +2,8 @@ var gameView = require('../view/gameView');
 var Item     = require('./Item');
 var level    = require('../level');
 
-var TILE_WIDTH  = settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 
 var ANIMATION = [
 	assets.entity.item.life0,

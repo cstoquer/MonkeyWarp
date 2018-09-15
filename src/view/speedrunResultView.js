@@ -1,6 +1,5 @@
 var TextBox  = require('../TextBox');
 var speedrun = require('../speedrun');
-var gamepad  = require('../gamepad');
 
 var DEATH = chr$(64);
 var MAX_LINE = 11;
@@ -57,9 +56,8 @@ function scrollResult() {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.update = function () {
-	var gamepads = gamepad.getAnyGamepad();
 	// action
-	if (gamepads.btnp.A    ) scrollResult();
-	if (gamepads.btnp.B    ) scrollResult();
-	if (gamepads.btnp.start) scrollResult();
+	if (gamepad.btnp.A    ) scrollResult();
+	if (gamepad.btnp.B    ) scrollResult();
+	if (gamepad.btnp.start) scrollResult();
 };

@@ -62,6 +62,13 @@ function setNeighbourSprite(x, y, map) {
 	setSpriteAtPosition(x, y, item.sprite, map);
 }
 
+function setNeighbour(x, y, map) {
+	setNeighbourSprite(x + 1, y, map);
+	setNeighbourSprite(x - 1, y, map);
+	setNeighbourSprite(x, y + 1, map);
+	setNeighbourSprite(x, y - 1, map);
+}
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 module.exports = {
 	name:     'winston-kun',
@@ -70,24 +77,16 @@ module.exports = {
 	deselect: null,
 	start:    null,
 	end:      null,
-	draw: function (x, y, toolbox, isStart) {
-		var toolbox     = toolbox;
-		var mapEditor   = toolbox.mapEditor;
-		var spritesheet = toolbox.spritesheet;
-		var keyboard    = toolbox.keyboard;
-		var map = mapEditor.map;
+	draw: function (x, y, map, toolbox, isStart, e) {
 
-		if (keyboard.shift) {
-			map.remove(x, y);
-		} else {
-			// set sprite at position
-			setSpriteAtPosition(x, y, spritesheet.sprite, map);
-		}
+		// set sprite at position
+		setSpriteAtPosition(x, y, toolbox.tilesheet.sprite, map);
 
 		// update around
-		setNeighbourSprite(x + 1, y, map);
-		setNeighbourSprite(x - 1, y, map);
-		setNeighbourSprite(x, y + 1, map);
-		setNeighbourSprite(x, y - 1, map);
+		setNeighbour(x, y, map);
+	},
+	erase: function (x, y, map, toolbox, isStart, e) {
+		map.remove(x, y);
+		setNeighbour(x, y, map);
 	}
-}
+};

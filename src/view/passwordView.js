@@ -1,11 +1,10 @@
 var viewManager   = require('../viewManager');
-var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var PassGrid      = require('../passGrid');
 var TextBox       = require('../TextBox');
 
 var PASSWORDS   = {};
-var TILE_WIDTH  = settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 var OFFSET_X    = 52;
 var OFFSET_Y    = 44;
 var BACKGROUND  = getMap('passBG');
@@ -46,16 +45,14 @@ exports.open = function () {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.update = function () {
-	var gamepads = getAnyGamepad();
-
 	// action
-	if (gamepads.btnp.right) cursor.x = (cursor.x + 1) % 5;
-	if (gamepads.btnp.left ) cursor.x = (cursor.x + 4) % 5;
-	if (gamepads.btnp.down ) cursor.y = (cursor.y + 1) % 5;
-	if (gamepads.btnp.up   ) cursor.y = (cursor.y + 4) % 5;
-	if (gamepads.btnp.A    ) passGrid.switchBit(cursor.x, cursor.y);
+	if (gamepad.btnp.right) cursor.x = (cursor.x + 1) % 5;
+	if (gamepad.btnp.left ) cursor.x = (cursor.x + 4) % 5;
+	if (gamepad.btnp.down ) cursor.y = (cursor.y + 1) % 5;
+	if (gamepad.btnp.up   ) cursor.y = (cursor.y + 4) % 5;
+	if (gamepad.btnp.A    ) passGrid.switchBit(cursor.x, cursor.y);
 
-	if (gamepads.btnr.B) {
+	if (gamepad.btnr.B) {
 		var word  = passGrid.getPassword();
 		var level = PASSWORDS[word]
 		if (level) {
@@ -66,7 +63,7 @@ exports.update = function () {
 		}
 	}
 
-	if (gamepads.btnp.start) viewManager.open('title');
+	if (gamepad.btnp.start) viewManager.open('title');
 
 	// animations
 	cursor.frame += ANIMATION_SPEED;

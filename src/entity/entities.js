@@ -8,8 +8,8 @@ var Spark       = require('./Spark');
 var ChainedBall = require('./ChainedBall');
 var Bat         = require('./Bat');
 
-var TILE_WIDTH  = settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
+var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function createEntity(classRef, param, item, collide) {
@@ -28,7 +28,7 @@ function createEntity(classRef, param, item, collide) {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.createEntityfromMapItem = function (item) {
-	switch (item.tile) {
+	switch (item.sprite) {
 		// items
 		case 32:
 		case 33: return createEntity(ItemKey,     null, item, true);

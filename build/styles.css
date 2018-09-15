@@ -2,6 +2,7 @@ body {
 	text-align: center;
 	font-family: verdana;
 	background-color: #D5E890;
+	margin: 0;
 }
 
 canvas {
@@ -24,7 +25,7 @@ canvas {
 	box-shadow: 1px 1px 10px #333;
 	font-size: 12px;
 	background-color: #CCC;
-	z-index: 0;
+	z-index: 10;
 }
 
 .button {

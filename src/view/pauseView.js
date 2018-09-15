@@ -1,5 +1,4 @@
 var gameView      = require('./gameView');
-var getAnyGamepad = require('../gamepad').getAnyGamepad;
 var viewManager   = require('../viewManager');
 var TextBox       = require('../TextBox');
 var PassGrid      = require('../passGrid');
@@ -39,8 +38,7 @@ exports.update = function () {
 
 	if (showPassGrid) passGrid.draw(52, 56);
 
-	var gamepads = getAnyGamepad();
-	if (gamepads.btnp.start) {
+	if (gamepad.btnp.start) {
 		// continue
 		viewManager.open('game', { resume: true });
 	}

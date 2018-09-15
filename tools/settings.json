@@ -1,43 +1,64 @@
 {
-	"disposition": {
+	"windowSize": {
+		"width": 1482,
+		"height": 803
+	},
+	"state": {
+		"mapEditor": {
+			"x": 160,
+			"y": 21,
+			"open": true,
+			"width": 1024,
+			"height": 704
+		},
+		"mapClipboard": {
+			"x": 1214,
+			"y": 597,
+			"open": true,
+			"width": 264,
+			"height": 184
+		},
 		"tilesheet": {
-			"x": 888,
-			"y": 15,
-			"viewW": 0,
-			"viewH": 0
+			"x": 1216,
+			"y": 21,
+			"open": true,
+			"zoom": 2
+		},
+		"tileBrush": {
+			"x": 1216,
+			"y": 325,
+			"open": true,
+			"width": 264,
+			"height": 248
 		},
 		"palette": {
-			"x": 12,
-			"y": 645,
-			"viewW": 0,
-			"viewH": 0
-		},
-		"mapEditor": {
-			"x": 205,
-			"y": 10,
-			"viewW": 219,
-			"viewH": 203
-		},
-		"assetList": {
 			"x": 0,
-			"y": 0,
-			"viewW": 185,
-			"viewH": 601,
-			"foldConfig": {
-				"maps": {},
-				"newBank": {
-					"fol": {}
+			"y": 741,
+			"open": true
+		},
+		"assets": {
+			"x": 0,
+			"y": 21,
+			"open": true,
+			"width": 152,
+			"height": 696,
+			"assets": {
+				"maps.json": {
+					"forest": {}
 				}
 			}
 		},
-		"customTools": {
-			"x": 923,
-			"y": 474,
-			"viewW": 403,
-			"viewH": 313,
-			"foldConfig": {
-				"brush": {}
-			}
+		"console": {
+			"x": 256,
+			"y": 213,
+			"open": false,
+			"width": 648,
+			"height": 488
+		},
+		"settings": {
+			"x": 1008,
+			"y": 69,
+			"open": true
 		}
 	}
 }
