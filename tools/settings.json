@@ -8,8 +8,8 @@
 			"x": 160,
 			"y": 21,
 			"open": true,
-			"width": 1024,
-			"height": 704
+			"width": 1022,
+			"height": 702
 		},
 		"mapClipboard": {
 			"x": 1214,
@@ -42,11 +42,7 @@
 			"open": true,
 			"width": 152,
 			"height": 696,
-			"assets": {
-				"maps.json": {
-					"forest": {}
-				}
-			}
+			"assets": {}
 		},
 		"console": {
 			"x": 256,
@@ -56,9 +52,9 @@
 			"height": 488
 		},
 		"settings": {
-			"x": 1008,
-			"y": 69,
-			"open": true
+			"x": 528,
+			"y": 149,
+			"open": false
 		}
 	}
 }

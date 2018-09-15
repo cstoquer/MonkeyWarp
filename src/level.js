@@ -1,4 +1,4 @@
-var Map      = require('TileMap');
+var TileMap  = require('TileMap');
 var Texture  = require('Texture');
 var tiles    = require('./tiles');
 var entities = require('./entity/entities')
@@ -15,7 +15,7 @@ t.height = 18;
 
 t.background = null;
 t.layer      = new Texture(t.width * TILE_WIDTH, t.height * TILE_HEIGHT);
-t.geometry   = new Map(t.width, t.height);
+t.geometry   = new TileMap(t.width, t.height);
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.load = function (levelId) {
@@ -93,9 +93,9 @@ exports.getEntryPoints = function () {
 	var exits     = t.geometry.find(16);
 	var normalKey = t.geometry.find(32);
 	var glassKey  = t.geometry.find(33);
-	
+
 	var needKey = !!(normalKey.length || glassKey.length);
-	
+
 	if (entries.length !== 1 || exits.length !== 1) {
 		console.log('Level entry points miss configured');
 	}
