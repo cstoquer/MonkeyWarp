@@ -8,8 +8,8 @@
 			"x": 160,
 			"y": 21,
 			"open": true,
-			"width": 1018,
-			"height": 698
+			"width": 1012,
+			"height": 692
 		},
 		"mapClipboard": {
 			"x": 1214,
@@ -42,11 +42,7 @@
 			"open": true,
 			"width": 152,
 			"height": 696,
-			"assets": {
-				"maps.json": {
-					"cave2": {}
-				}
-			}
+			"assets": {}
 		},
 		"console": {
 			"x": 448,

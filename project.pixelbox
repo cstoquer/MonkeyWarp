@@ -15,12 +15,16 @@
 		"width": 8,
 		"height": 8
 	},
-	"palette": [
-		"#183725",
-		"#416E2B",
-		"#9FBB32",
-		"#CFE581"
-	],
+	"palette": {
+		"name": "gameboy",
+		"file": "palette",
+		"colors": [
+			"#183725",
+			"#416E2B",
+			"#9FBB32",
+			"#CFE581"
+		]
+	},
 	"controls": {
 		"left": 65,
 		"B": 76,
