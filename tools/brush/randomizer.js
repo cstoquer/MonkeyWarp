@@ -12,7 +12,7 @@ module.exports = {
 		}
 
 		//draw
-		var clipboard = toolbox.mapClipboard;
+		var clipboard = toolbox.mapClipboard.map;
 		var item = clipboard.get(
 			~~(Math.random() * clipboard.width),
 			~~(Math.random() * clipboard.height)

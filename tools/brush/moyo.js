@@ -11,7 +11,7 @@ module.exports = {
 	},
 
 	draw: function (x, y, map, toolbox, isStart) {
-		var clipboard = toolbox.mapClipboard;
+		var clipboard = toolbox.mapClipboard.map;
 		var tx = (x + sx) % clipboard.width;
 		var ty = (y + sy) % clipboard.height;
 		var item = clipboard.get(tx, ty);
