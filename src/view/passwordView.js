@@ -16,7 +16,7 @@ var CURSOR_ANIMATION = [
 	assets.hud.target.f1
 ];
 
-ANIMATION_SPEED = 0.1;
+var ANIMATION_SPEED = 0.1;
 
 var passwordText = new TextBox(8 * TILE_WIDTH, TILE_HEIGHT, assets.font.tetris).setColor(0);
 passwordText.addText('PASSWORD', 0, 0);

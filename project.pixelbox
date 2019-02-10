@@ -58,6 +58,8 @@
 		"custom": ""
 	},
 	"buildOptions": {
-		"hasAtlas": true
+		"scriptLanguage": "ES5",
+		"hasAtlas": true,
+		"tokenify": []
 	}
 }

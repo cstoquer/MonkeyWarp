@@ -260,7 +260,7 @@ exports.addEntity = function (entity, doCollide) {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.removeEntityFromCollisions = function (entity) {
 	// remove from collide
-	index = entitiesCollide.indexOf(entity);
+	var index = entitiesCollide.indexOf(entity);
 	if (index !== -1) entitiesCollide.splice(index, 1);
 };
 
@@ -286,7 +286,7 @@ exports.displayMessage = function (message) {
 exports.updateHealthHUD = function () {
 	healthHUD.clear();
 	for (var i = 0; i < monkey.maxLife; i++) {
-		s = i < monkey.lifePoints ? assets.hud.healthFull : assets.hud.healthEmpty;
+		var s = i < monkey.lifePoints ? assets.hud.healthFull : assets.hud.healthEmpty;
 		healthHUD.draw(s, 1 + i * 5, 0);
 	}
 };
