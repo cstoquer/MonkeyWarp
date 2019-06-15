@@ -4,19 +4,16 @@ module.exports = {
 	name: 'randomizer',
 	description: 'Draw a random tile from the clipboard',
 
-	draw: function (x, y, map, toolbox, isStart) {
-		//delete
-		if (toolbox.keyboard.shift) {
-			map.remove(x, y);
-			return;
-		}
+	erase: function (x, y, map) {
+		map.remove(x, y);
+	},
 
-		//draw
+	draw: function (x, y, map, toolbox, isStart) {
 		var clipboard = toolbox.mapClipboard.map;
-		var item = clipboard.get(
+		var tile = clipboard.get(
 			~~(Math.random() * clipboard.width),
 			~~(Math.random() * clipboard.height)
 		);
-		map.set(x, y, item.sprite, item.flipH, item.flipV, item.flipR, item.flagA, item.flagB);
+		map.set(x, y, tile.sprite, tile.flipH, tile.flipV, tile.flipR);
 	}
-}
+};
