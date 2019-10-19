@@ -1,5 +1,5 @@
-var TileMap  = require('TileMap');
-var Texture  = require('Texture');
+var TileMap  = require('pixelbox/TileMap');
+var Texture  = require('pixelbox/Texture');
 var tiles    = require('./tiles');
 var entities = require('./entity/entities')
 
@@ -13,8 +13,10 @@ var t = exports;
 t.width  = 20;
 t.height = 18;
 
+// t.layer      = new Texture(t.width * TILE_WIDTH, t.height * TILE_HEIGHT);
 t.background = null;
-t.layer      = new Texture(t.width * TILE_WIDTH, t.height * TILE_HEIGHT);
+t.layers     = null;
+t.doors      = null;
 t.geometry   = new TileMap(t.width, t.height);
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -36,13 +38,16 @@ exports.load = function (levelId) {
 	t.background = getMap(path + 'B');
 
 	// design
-	t.layer.resize(w, h);
-	t.layer.clear();
+	// t.layer.resize(w, h);
+	// t.layer.clear();
+	t.layers = [];
+	t.doors  = [];
 
 	var l = 0;
 	var layer = getMap(path + 'L' + l);
 	while (layer) {
-		t.layer.draw(layer);
+		// t.layer.draw(layer);
+		t.layers.push(layer);
 		layer = getMap(path + 'L' + (++l));
 	}
 
@@ -59,13 +64,26 @@ exports.load = function (levelId) {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+exports.addDoor = function (asset, x, y) {
+	// this.layer.draw(asset, x, y);
+	this.doors.push({ asset: asset, x: x, y: y });
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.drawBackground = function () {
 	if (t.background) draw(t.background, 0, 0);
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 exports.draw = function () {
-	draw(t.layer, 0, 0);
+	// draw(t.layer, 0, 0);
+	for (var i = 0; i < t.layers.length; i++) {
+		draw(t.layers[i], 0, 0);
+	}
+	for (var i = 0; i < t.doors.length; i++) {
+		var door = t.doors[i];
+		draw(door.asset, door.x, door.y);
+	}
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄

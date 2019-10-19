@@ -1,4 +1,4 @@
-var TileMap = require('TileMap');
+var TileMap = require('pixelbox/TileMap');
 
 var GRID = getMap('passGrid');
 var BUBBLE = 7;

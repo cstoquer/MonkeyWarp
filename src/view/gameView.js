@@ -1,4 +1,4 @@
-var Texture       = require('Texture');
+var Texture       = require('pixelbox/Texture');
 var viewManager   = require('../viewManager');
 var Monkey        = require('../Monkey');
 var level         = require('../level');
@@ -69,8 +69,9 @@ exports.shakeCamera = function (force) {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-function drawDoor(entryPoint, direction, type) {
-	level.layer.draw(
+function addDoor(entryPoint, direction, type) {
+	// level.layer.draw(
+	level.addDoor(
 		assets.entity.doors[direction + type],
 		entryPoint[direction].x * TILE_W - 8,
 		entryPoint[direction].y * TILE_H - 8
@@ -133,8 +134,8 @@ function loadLevel() {
 
 	// add doors
 	var doorType = levelData.doorType || 1;
-	drawDoor(entryPoint, 'entry', doorType);
-	drawDoor(entryPoint, 'exit',  doorType);
+	addDoor(entryPoint, 'entry', doorType);
+	addDoor(entryPoint, 'exit',  doorType);
 	needKey = entryPoint.needKey;
 
 	// level boundaries

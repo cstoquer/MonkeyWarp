@@ -1,5 +1,5 @@
 var viewManager = require('./viewManager');
-var util        = require('domUtils');
+var util        = require('pixelbox/domUtils');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 var panel   = util.createDiv('panel');

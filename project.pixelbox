@@ -48,7 +48,8 @@
 		"keyboard": true,
 		"AudioManager": true,
 		"TINA": false,
-		"gamepad": true
+		"gamepad": true,
+		"webGL": true
 	},
 	"loader": {
 		"colors": [
