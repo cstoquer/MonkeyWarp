@@ -26,13 +26,13 @@
 		]
 	},
 	"controls": {
-		"left": 65,
-		"B": 76,
-		"up": 87,
-		"down": 83,
 		"right": 68,
 		"A": 75,
-		"start": 13
+		"start": 13,
+		"up": 87,
+		"down": 83,
+		"B": 76,
+		"left": 65
 	},
 	"gamepad": {
 		"analogToDpad": true,
@@ -53,8 +53,8 @@
 	},
 	"loader": {
 		"colors": [
-			3,
-			2
+			"#CFE581",
+			"#183725"
 		],
 		"custom": ""
 	},
@@ -62,5 +62,6 @@
 		"scriptLanguage": "ES5",
 		"hasAtlas": true,
 		"tokenify": []
-	}
+	},
+	"appid": "P83eGaylrJ9h0mEd"
 }
