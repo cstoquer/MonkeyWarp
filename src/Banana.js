@@ -4,8 +4,8 @@ var AABB           = require('./AABBcollision');
 
 var ASSET = assets.entity.banana;
 
-var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width;
+var TILE_HEIGHT = settings.tileSize.height;
 
 var FRICTION         = 0.9;
 var ACCELERATION     = 0.01;
@@ -79,8 +79,8 @@ Banana.prototype.update = function () {
 		}
 		this.levelCollisions();
 	} else if (this.flying) {
-		this.sx += clip((this.owner.x - this.x) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
-		this.sy += clip((this.owner.y - this.y) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
+		this.sx += clamp((this.owner.x - this.x) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
+		this.sy += clamp((this.owner.y - this.y) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
 
 		this.sx *= FRICTION;
 		this.sy *= FRICTION;
@@ -90,7 +90,7 @@ Banana.prototype.update = function () {
 
 		// the monkey catch the banana
 		if (AABB(this, this.owner)) this._catchBanana();
-		
+
 	} else {
 		this.x = this.owner.x + 3;
 		this.y = this.owner.y - 5;

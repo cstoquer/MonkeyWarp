@@ -4,8 +4,6 @@ var animations     = require('../animations');
 var level          = require('../level');
 var ItemLife       = require('./ItemLife');
 
-var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 var SPEED = 0.1;
 
 var ANIMATION = [
@@ -50,7 +48,7 @@ Worm.prototype.draw = function () {
 	// fetch position
 	this.x = x;
 	this.y = y;
-	
+
 	// draw
 	this.frame += SPEED;
 	if (this.frame >= ANIMATION_LENGTH) this.frame = 0;

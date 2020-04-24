@@ -2,7 +2,6 @@ var TextBox = require('./TextBox');
 
 var SECOND = 60; // 60 FPS
 var MINUTE = SECOND * 60;
-var HOUR   = MINUTE * 60;
 
 var LEVELS = assets.levels;
 var TOTAL_LEVEL = { index: -1, level: null, chapter: null };

@@ -8,8 +8,8 @@ var speedrun      = require('../speedrun');
 
 var SCREEN_W = settings.screen.width;
 var SCREEN_H = settings.screen.height;
-var TILE_W   = settings.tileSize.width  || settings.tileSize[0];
-var TILE_H   = settings.tileSize.width  || settings.tileSize[0];
+var TILE_W   = settings.tileSize.width;
+var TILE_H   = settings.tileSize.height;
 var CENTER_X = ~~(SCREEN_W / 2) - 4;
 var CENTER_Y = ~~(SCREEN_H / 2) - 4;
 
@@ -147,8 +147,8 @@ function loadLevel() {
 	monkey.y = entryPoint.entry.y * TILE_H;
 
 	// init camera on monkey
-	camX = clip(monkey.x - CENTER_X, 0, MAX_LEVEL_W);
-	camY = clip(monkey.y - CENTER_Y, 0, MAX_LEVEL_H);
+	camX = clamp(monkey.x - CENTER_X, 0, MAX_LEVEL_W);
+	camY = clamp(monkey.y - CENTER_Y, 0, MAX_LEVEL_H);
 
 	exports.updateHealthHUD();
 }
@@ -197,8 +197,8 @@ exports.update = function () {
 	monkey.update();
 
 	// update camera position
-	var scrollX = clip(monkey.x - CENTER_X, 0, MAX_LEVEL_W);
-	var scrollY = clip(monkey.y - CENTER_Y, 0, MAX_LEVEL_H);
+	var scrollX = clamp(monkey.x - CENTER_X, 0, MAX_LEVEL_W);
+	var scrollY = clamp(monkey.y - CENTER_Y, 0, MAX_LEVEL_H);
 
 	var diffX = scrollX - camX;
 	if (diffX > -1 && diffX < 1) camX = scrollX;

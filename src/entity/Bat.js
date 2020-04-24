@@ -1,11 +1,8 @@
 var gameView       = require('../view/gameView');
 var ShortAnimation = require('../ShortAnimation');
 var animations     = require('../animations');
-var level          = require('../level');
 var ItemLife       = require('./ItemLife');
 
-var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
 var ANIMATION_SPEED = 0.2;
 var ANIMATION = [
 	assets.entity.bat.fly0,
@@ -56,8 +53,8 @@ Bat.prototype.draw = function () {
 	var tx = monkey.x + 4;
 	var ty = monkey.y - 4;
 
-	this.sx += clip((tx - this.x) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
-	this.sy += clip((ty - this.y) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
+	this.sx += clamp((tx - this.x) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
+	this.sy += clamp((ty - this.y) * ACCELERATION, -MAX_ACCELERATION, MAX_ACCELERATION);
 
 	this.sx *= FRICTION;
 	this.sy *= FRICTION;
@@ -78,7 +75,7 @@ Bat.prototype.draw = function () {
 	// fetch position
 	this.x = x;
 	this.y = y;
-	
+
 	// draw
 	this.frame += ANIMATION_SPEED;
 	if (this.frame >= ANIMATION_LENGTH) this.frame = 0;

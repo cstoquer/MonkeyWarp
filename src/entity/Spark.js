@@ -1,9 +1,8 @@
-var gameController = require('../view/gameView');
-var level          = require('../level');
+var level = require('../level');
 
 
-var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width;
+var TILE_HEIGHT = settings.tileSize.height;
 
 var ANIM_SPEED  = 0.2;
 var FREEZE_DURATION = 240;
@@ -56,7 +55,7 @@ Spark.prototype.draw = function () {
 		this.moveCounter = 0;
 		this._getNextMove();
 	}
-	
+
 	// draw
 	this.frame += ANIM_SPEED;
 	if (this.frame >= 2) this.frame = 0;
@@ -86,7 +85,6 @@ Spark.prototype._getNextMove = function () {
 	var i = ~~(this.x / TILE_WIDTH);
 	var j = ~~(this.y / TILE_HEIGHT);
 
-	var direction = this.direction;
 	var anchorId  = (this.directionId + 1) % 4;
 	var anchor    = DIRECTIONS[anchorId];
 

@@ -1,7 +1,7 @@
 var Texture = require('pixelbox/Texture');
-var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width;
 var CHAR_OFFSET = 32;
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function TextBox(w, h, font, color) {
 	this.w     = w;

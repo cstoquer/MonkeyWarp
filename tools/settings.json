@@ -69,7 +69,6 @@
 			"assets": {
 				"entity": {
 					"banana": {},
-					"chainedBall": {},
 					"doors": {},
 					"worm": {}
 				},
@@ -81,7 +80,7 @@
 			}
 		},
 		"console": {
-			"x": 272,
+			"x": 240,
 			"y": 324,
 			"open": false,
 			"width": 632,

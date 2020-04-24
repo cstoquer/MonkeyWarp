@@ -1,4 +1,3 @@
-var level       = require('../level');
 var gameView    = require('../view/gameView');
 var ItemKey     = require('./ItemKey');
 var ItemLife    = require('./ItemLife');
@@ -8,8 +7,8 @@ var Spark       = require('./Spark');
 var ChainedBall = require('./ChainedBall');
 var Bat         = require('./Bat');
 
-var TILE_WIDTH  = settings.tileSize.width  || settings.tileSize[0];
-var TILE_HEIGHT = settings.tileSize.height || settings.tileSize[1];
+var TILE_WIDTH  = settings.tileSize.width;
+var TILE_HEIGHT = settings.tileSize.height;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function createEntity(classRef, param, item, collide) {
